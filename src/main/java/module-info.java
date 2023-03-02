@@ -3,6 +3,7 @@ module com.example.uiformyproject {
     requires javafx.fxml;
 
     requires org.kordamp.bootstrapfx.core;
+    requires com.fasterxml.jackson.databind;
 
     opens com.example.uiformyproject to javafx.fxml;
     exports com.example.uiformyproject;

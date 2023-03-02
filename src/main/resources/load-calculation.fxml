@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="455.0" prefWidth="471.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.uiformyproject.LoadCalculationController" stylesheets="styles.css">
+
+    <MenuBar>
+        <Menu text="File">
+            <MenuItem onAction="#menuItemFileExitAction" text="Exit"/>
+        </Menu>
+    </MenuBar>
+    <ListView VBox.vgrow="ALWAYS" >
+
+        <HBox spacing="10" >
+            <Text text="startInformId"/>
+            <TextField HBox.hgrow="ALWAYS" fx:id="startInformId"/>
+        </HBox>
+        <HBox spacing="10">
+            <Text text="name"/>
+            <TextField HBox.hgrow="ALWAYS" fx:id="name"/>
+        </HBox>
+        <HBox spacing="10">
+            <Text text="power"/>
+            <TextField HBox.hgrow="ALWAYS" fx:id="power"/>
+        </HBox>
+        <HBox spacing="10">
+            <Text text="amount"/>
+            <TextField HBox.hgrow="ALWAYS" fx:id="amount"/>
+        </HBox>
+        <HBox spacing="10">
+            <Text text="ki"/>
+            <TextField HBox.hgrow="ALWAYS" fx:id="ki"/>
+        </HBox>
+        <HBox spacing="10">
+            <Text text="cosf"/>
+            <TextField HBox.hgrow="ALWAYS" fx:id="cosf"/>
+        </HBox>
+        <HBox spacing="10">
+            <Text text="tgf"/>
+            <TextField HBox.hgrow="ALWAYS" fx:id="tgf"/>
+        </HBox>
+
+    </ListView>
+    <Button text="ADD" onAction="#addToStartInformationDB"/>
+
+</VBox>
