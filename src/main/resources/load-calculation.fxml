@@ -4,17 +4,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="455.0" prefWidth="471.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.uiformyproject.LoadCalculationController" stylesheets="styles.css">
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.uiformyproject.LoadCalculationController"
+      stylesheets="styles.css">
+
 
     <MenuBar>
+        <Menu text="Back">
+            <MenuItem onAction="#backToStartPage" text="Back"/>
+        </Menu>
         <Menu text="File">
             <MenuItem onAction="#menuItemFileExitAction" text="Exit"/>
         </Menu>
     </MenuBar>
-    <ListView VBox.vgrow="ALWAYS" >
+    <ListView VBox.vgrow="ALWAYS">
 
-        <HBox spacing="10" >
+        <HBox spacing="10">
             <Text text="startInformId"/>
             <TextField HBox.hgrow="ALWAYS" fx:id="startInformId"/>
         </HBox>
@@ -44,6 +49,6 @@
         </HBox>
 
     </ListView>
-    <Button text="ADD" onAction="#addToStartInformationDB"/>
+    <Button text="CREATE" onAction="#addToStartInformationDB"/>
 
 </VBox>

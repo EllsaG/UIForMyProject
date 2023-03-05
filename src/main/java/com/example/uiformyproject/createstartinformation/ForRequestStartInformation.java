@@ -1,6 +1,6 @@
-package com.example.uiformyproject;
+package com.example.uiformyproject.createstartinformation;
 
-public class ForRequest {
+public class ForRequestStartInformation {
     private Long startInformId;
     private String name;
     private double power;

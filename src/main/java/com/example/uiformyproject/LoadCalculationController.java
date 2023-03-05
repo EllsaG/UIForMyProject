@@ -1,24 +1,29 @@
 package com.example.uiformyproject;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import javafx.application.Platform;
-import javafx.css.StyleableProperty;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
+import com.example.uiformyproject.createstartinformation.ForRequestStartInformation;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class LoadCalculationController implements Initializable {
+import java.io.IOException;
 
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.HttpHostConnectException;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
+
+public class LoadCalculationController {
     @FXML
     TextField startInformId;
     @FXML
@@ -37,45 +42,40 @@ public class LoadCalculationController implements Initializable {
     public void menuItemFileExitAction(ActionEvent actionEvent) {
         Platform.exit();
     }
+    public void backToStartPage(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) startInformId.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/start-page.fxml"));
+        stage.setTitle("Start Page");
+        stage.setScene(new Scene(root));
+    }
 
-
-    public void addToStartInformationDB(ActionEvent actionEvent) throws JsonProcessingException {
-
+    public void addToStartInformationDB(ActionEvent actionEvent) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        ForRequest forRequest = new ForRequest();
+        ForRequestStartInformation forRequestStartInformation = new ForRequestStartInformation();
 
-        forRequest.setStartInformId(Long.valueOf(startInformId.getText()));
-        forRequest.setName(name.getText());
-        forRequest.setPower(Double.valueOf(power.getText()));
-        forRequest.setAmount(Integer.valueOf(amount.getText()));
-        forRequest.setKi(Double.valueOf(ki.getText()));
-        forRequest.setCosf(Double.valueOf(cosf.getText()));
-        forRequest.setTgf(Double.valueOf(tgf.getText()));
-        String value = objectMapper.writeValueAsString(forRequest);
+        forRequestStartInformation.setStartInformId(Long.valueOf(startInformId.getText()));
+        forRequestStartInformation.setName(name.getText());
+        forRequestStartInformation.setPower(Double.valueOf(power.getText()));
+        forRequestStartInformation.setAmount(Integer.valueOf(amount.getText()));
+        forRequestStartInformation.setKi(Double.valueOf(ki.getText()));
+        forRequestStartInformation.setCosf(Double.valueOf(cosf.getText()));
+        forRequestStartInformation.setTgf(Double.valueOf(tgf.getText()));
 
-        System.out.println(value);
+        String value = objectMapper.writeValueAsString(forRequestStartInformation);
 
-        String request = "http://localhost:9999//startinformation/create";
-        HttpURLConnection connection = null;
-
-        try {
-            connection = (HttpURLConnection) new URL(request).openConnection();
-            connection.setRequestMethod("POST");
-            connection.setConnectTimeout(2000);
-            connection.connect();
-            connection.getRequestProperty(value);
-
-        } catch (Throwable e) {
-            throw new RuntimeException(e);
-        } finally {
-            connection.disconnect();
+        String result = "";
+        HttpPost post = new HttpPost("http://localhost:9999//startinformation/create");
+        post.addHeader("content-type", "application/json");
+        post.setEntity(new StringEntity(value));
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+             CloseableHttpResponse response = httpClient.execute(post)) {
+            result = EntityUtils.toString(response.getEntity());
+        } catch (HttpHostConnectException e) {
+            throw new RuntimeException("Unable to connect " + post.getURI());
         }
-
-
+        System.out.println(result);
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    }
+
 }
