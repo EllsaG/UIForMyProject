@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.startpage.StartPageController"
       prefHeight="600.0" prefWidth="1024.0"
@@ -19,7 +17,8 @@
     </MenuBar>
 
     <ListView VBox.vgrow="ALWAYS" >
-        <Button text="ADD EQUIPMENT"  onAction="#addEquipment" fx:id="addEquipment"  alignment="CENTER" />
+        <Button alignment="CENTER" text="ADD EQUIPMENT"  onAction="#addEquipment" fx:id="addEquipment"   />
+        <Button alignment="CENTER" text="GET START INFO"  onAction="#getStartInformation" fx:id="getStartInformation"   />
 
 
     </ListView>

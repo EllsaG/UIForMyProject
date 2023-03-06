@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.getpage.GetController">
+
+    <MenuBar>
+        <Menu text="Back">
+            <MenuItem onAction="#backToStartPage" text="Back" />
+        </Menu>
+        <Menu text="File">
+            <MenuItem onAction="#menuItemFileExitAction" text="Exit" />
+        </Menu>
+    </MenuBar>
+
+    <ListView prefWidth="1024.0" VBox.vgrow="ALWAYS">
+
+    <HBox spacing="10">
+        <Text text="startInformId" />
+        <TextField fx:id="startInformId" HBox.hgrow="ALWAYS" />
+    </HBox>
+    </ListView>
+
+    <ListView prefWidth="1024.0" VBox.vgrow="ALWAYS">
+        <Text fx:id="responseGet" text="" />
+    </ListView>
+
+    <Button alignment="CENTER" onAction="#getStartInformation" text="GET INFORMATION" textAlignment="CENTER" />
+
+</VBox>

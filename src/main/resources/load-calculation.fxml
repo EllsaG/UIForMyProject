@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.uiformyproject.LoadCalculationController"
-      stylesheets="styles.css">
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="1024.0" stylesheets="styles.css"
+      xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.uiformyproject.LoadCalculationController">
 
 
     <MenuBar>
@@ -17,38 +17,44 @@
             <MenuItem onAction="#menuItemFileExitAction" text="Exit"/>
         </Menu>
     </MenuBar>
-    <ListView VBox.vgrow="ALWAYS">
 
-        <HBox spacing="10">
-            <Text text="startInformId"/>
-            <TextField HBox.hgrow="ALWAYS" fx:id="startInformId"/>
-        </HBox>
-        <HBox spacing="10">
-            <Text text="name"/>
-            <TextField HBox.hgrow="ALWAYS" fx:id="name"/>
-        </HBox>
-        <HBox spacing="10">
-            <Text text="power"/>
-            <TextField HBox.hgrow="ALWAYS" fx:id="power"/>
-        </HBox>
-        <HBox spacing="10">
-            <Text text="amount"/>
-            <TextField HBox.hgrow="ALWAYS" fx:id="amount"/>
-        </HBox>
-        <HBox spacing="10">
-            <Text text="ki"/>
-            <TextField HBox.hgrow="ALWAYS" fx:id="ki"/>
-        </HBox>
-        <HBox spacing="10">
-            <Text text="cosf"/>
-            <TextField HBox.hgrow="ALWAYS" fx:id="cosf"/>
-        </HBox>
-        <HBox spacing="10">
-            <Text text="tgf"/>
-            <TextField HBox.hgrow="ALWAYS" fx:id="tgf"/>
-        </HBox>
 
+        <ListView VBox.vgrow="ALWAYS">
+
+            <HBox spacing="10">
+                <Text text="startInformId" />
+                <TextField fx:id="startInformId" HBox.hgrow="ALWAYS" />
+            </HBox>
+            <HBox spacing="10">
+                <Text text="name" />
+                <TextField fx:id="name" HBox.hgrow="ALWAYS" />
+            </HBox>
+            <HBox spacing="10">
+                <Text text="power" />
+                <TextField fx:id="power" HBox.hgrow="ALWAYS" />
+            </HBox>
+            <HBox spacing="10">
+                <Text text="amount" />
+                <TextField fx:id="amount" HBox.hgrow="ALWAYS" />
+            </HBox>
+            <HBox spacing="10">
+                <Text text="ki" />
+                <TextField fx:id="ki" HBox.hgrow="ALWAYS" />
+            </HBox>
+            <HBox spacing="10">
+                <Text text="cosf" />
+                <TextField fx:id="cosf" HBox.hgrow="ALWAYS" />
+            </HBox>
+            <HBox spacing="10">
+                <Text text="tgf" />
+                <TextField fx:id="tgf" HBox.hgrow="ALWAYS" />
+            </HBox>
+
+        </ListView>
+
+    <ListView prefWidth="1024.0" VBox.vgrow="ALWAYS">
+        <Text text="" fx:id="responseGet"/>
     </ListView>
-    <Button text="CREATE" onAction="#addToStartInformationDB"/>
+    <Button onAction="#addToStartInformationDB" text="CREATE"/>
 
 </VBox>

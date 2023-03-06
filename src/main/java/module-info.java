@@ -13,5 +13,9 @@ module com.example.uiformyproject {
     opens com.example.uiformyproject.createstartinformation to javafx.fxml;
     exports com.example.startpage;
     opens com.example.startpage to javafx.fxml;
+    exports com.example.getpage;
+    opens com.example.getpage to javafx.fxml;
+    exports com.example.response;
+    opens com.example.response to javafx.fxml;
 
 }
