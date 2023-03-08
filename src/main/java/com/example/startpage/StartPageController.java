@@ -26,7 +26,7 @@ public class StartPageController {
     public void addEquipment(ActionEvent actionEvent) throws IOException {
 
         Stage stage = (Stage) addEquipment.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/load-calculation.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/create-start-information.fxml"));
         stage.setTitle("Load Calculation");
         stage.setScene(new Scene(root));
 
@@ -34,7 +34,7 @@ public class StartPageController {
 
     public void getStartInformation(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) getStartInformation.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/get-start-information.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/create-start-information.fxml"));
         stage.setTitle("Load Calculation");
         stage.setScene(new Scene(root));
     }

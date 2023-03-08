@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane stylesheets="styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.addallstartinfo.AddAllForStartController">
+
+
+    <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Menu text="Back">
+            <MenuItem onAction="#backToStartPage" text="Back" />
+        </Menu>
+        <Menu text="File">
+            <MenuItem onAction="#menuItemFileExitAction" text="Exit" />
+        </Menu>
+
+    </MenuBar>
+    <VBox layoutX="59.0" layoutY="91.0" prefHeight="261.0" prefWidth="76.0" spacing="15.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="70.0">
+        <Text text="ID">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Text text="Name">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Text text="Power">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Text text="Amount">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Text text="ki">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Text text="cosf">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Text text="tgf">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+
+
+    </VBox>
+   <VBox layoutX="135.0" layoutY="91.0" prefHeight="262.0" prefWidth="161.0" spacing="11.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="70.0">
+      <children>
+         <TextField fx:id="tfId" />
+         <TextField fx:id="tfName" />
+         <TextField fx:id="tfPower" />
+         <TextField fx:id="tfAmount" />
+         <TextField fx:id="tfKi" />
+         <TextField fx:id="tfCosf" />
+         <TextField fx:id="tfTgf" />
+      </children></VBox>
+   <TableView fx:id="tvEquipments" layoutX="312.0" layoutY="91.0" prefHeight="500.0" prefWidth="700.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="40.0">
+     <columns>
+       <TableColumn fx:id="colID" minWidth="50.0" prefWidth="50.0" text="ID" />
+       <TableColumn fx:id="colName" minWidth="150.0" prefWidth="150.0" text="Name" />
+         <TableColumn fx:id="colPower" minWidth="70.0" prefWidth="70.0" text="Power" />
+         <TableColumn fx:id="colAmount" minWidth="70.0" prefWidth="70.0" text="Amount" />
+         <TableColumn fx:id="colKi" minWidth="70.0" prefWidth="70.0" text="ki" />
+         <TableColumn fx:id="colCosf" minWidth="70.0" prefWidth="70.0" text="cosf" />
+         <TableColumn fx:id="colTgf" minWidth="70.0" prefWidth="70.0" text="tgf" />
+         <TableColumn fx:id="colAvgDailyActivePower" minWidth="70.0" prefWidth="70.0" text="avg daily active power" />
+         <TableColumn fx:id="colAvgDailyReactivePower" minWidth="70.0" prefWidth="70.0" text="avg daily reactive power" />
+     </columns>
+      <columnResizePolicy>
+         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+      </columnResizePolicy>
+   </TableView>
+   <Button fx:id="addEquipment" layoutX="40.0" layoutY="343.0" mnemonicParsing="false" onAction="#addEquipment" prefHeight="25.0" prefWidth="70.0" text="CREATE" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="340.0" />
+   <Button fx:id="updateEquipment" layoutX="123.0" layoutY="343.0" mnemonicParsing="false" onAction="#getStartInformation" prefHeight="25.0" prefWidth="70.0" text="UPDATE" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="340.0" />
+   <Button layoutX="198.0" layoutY="343.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="DELETE" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="340.0" />
+   <TextArea fx:id="taMessage" blendMode="DARKEN" disable="true" layoutX="40.0" layoutY="386.0" prefHeight="200.0" prefWidth="230.0" text="INFORMATION AREA" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="415.0" />
+   <Button layoutX="105.0" layoutY="381.0" mnemonicParsing="false" text="REFRESH TABLE" AnchorPane.topAnchor="380.0" />
+
+
+</AnchorPane>

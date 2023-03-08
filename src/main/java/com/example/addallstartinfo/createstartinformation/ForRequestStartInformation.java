@@ -1,4 +1,4 @@
-package com.example.uiformyproject.createstartinformation;
+package com.example.addallstartinfo.createstartinformation;
 
 public class ForRequestStartInformation {
     private Long startInformId;
