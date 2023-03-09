@@ -8,6 +8,8 @@ public class StartInformationResponse {
     private double ki;
     private double cosf;
     private double tgf;
+    private double avgDailyActivePower;
+    private double avgDailyReactivePower;
 
     public Long getStartInformId() {
         return startInformId;
@@ -63,5 +65,21 @@ public class StartInformationResponse {
 
     public void setTgf(double tgf) {
         this.tgf = tgf;
+    }
+
+    public double getAvgDailyActivePower() {
+        return avgDailyActivePower;
+    }
+
+    public void setAvgDailyActivePower(double avgDailyActivePower) {
+        this.avgDailyActivePower = avgDailyActivePower;
+    }
+
+    public double getAvgDailyReactivePower() {
+        return avgDailyReactivePower;
+    }
+
+    public void setAvgDailyReactivePower(double avgDailyReactivePower) {
+        this.avgDailyReactivePower = avgDailyReactivePower;
     }
 }

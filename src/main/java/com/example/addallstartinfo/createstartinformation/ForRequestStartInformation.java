@@ -9,6 +9,18 @@ public class ForRequestStartInformation {
     private double cosf;
     private double tgf;
 
+    public ForRequestStartInformation(Long startInformId, String name, double power, int amount, double ki, double cosf, double tgf) {
+        this.startInformId = startInformId;
+        this.name = name;
+        this.power = power;
+        this.amount = amount;
+        this.ki = ki;
+        this.cosf = cosf;
+        this.tgf = tgf;
+    }
+
+    public ForRequestStartInformation() {
+    }
 
     public Long getStartInformId() {
         return startInformId;

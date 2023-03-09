@@ -82,10 +82,10 @@
       </columnResizePolicy>
    </TableView>
    <Button fx:id="addEquipment" layoutX="40.0" layoutY="343.0" mnemonicParsing="false" onAction="#addEquipment" prefHeight="25.0" prefWidth="70.0" text="CREATE" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="340.0" />
-   <Button fx:id="updateEquipment" layoutX="123.0" layoutY="343.0" mnemonicParsing="false" onAction="#getStartInformation" prefHeight="25.0" prefWidth="70.0" text="UPDATE" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="340.0" />
+   <Button fx:id="updateEquipment" layoutX="123.0" layoutY="343.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="UPDATE" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="340.0" />
    <Button layoutX="198.0" layoutY="343.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="DELETE" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="340.0" />
    <TextArea fx:id="taMessage" blendMode="DARKEN" disable="true" layoutX="40.0" layoutY="386.0" prefHeight="200.0" prefWidth="230.0" text="INFORMATION AREA" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="415.0" />
-   <Button layoutX="105.0" layoutY="381.0" mnemonicParsing="false" text="REFRESH TABLE" AnchorPane.topAnchor="380.0" />
+   <Button fx:id="refreshTable" layoutX="105.0" layoutY="381.0" mnemonicParsing="false" onAction="#getStartInformation" text="REFRESH TABLE" AnchorPane.topAnchor="380.0" />
 
 
 </AnchorPane>
