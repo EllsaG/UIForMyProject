@@ -4,10 +4,8 @@ import com.example.response.ErrorResponseMessage;
 import com.example.response.StartInformationResponse;
 
 import com.example.addallstartinfo.createstartinformation.*;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.deser.impl.PropertyValue;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,14 +14,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.HttpHostConnectException;
@@ -33,8 +29,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
 
 public class AddAllForStartController {
     @FXML
@@ -74,6 +68,15 @@ public class AddAllForStartController {
     TableColumn<ForInsertInTableView, Double> colAvgDailyReactivePower;
 
     @FXML
+    Button addEquipment;
+    @FXML
+    Button refreshTable;
+    @FXML
+    Button updateEquipment;
+    @FXML
+    Button deleteEquipment;
+
+    @FXML
     TextArea taMessage;
 
     public void menuItemFileExitAction(ActionEvent actionEvent) {
@@ -87,26 +90,74 @@ public class AddAllForStartController {
         stage.setScene(new Scene(root));
     }
 
-    public void addEquipment(ActionEvent actionEvent) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        ForRequestStartInformation forRequestStartInformation = new ForRequestStartInformation();
-        try {
-
-            forRequestStartInformation.setStartInformId(Long.valueOf(tfId.getText()));
-            forRequestStartInformation.setName(tfName.getText().trim());
-            forRequestStartInformation.setPower(Double.valueOf(tfPower.getText()));
-            forRequestStartInformation.setAmount(Integer.valueOf(tfAmount.getText()));
-            forRequestStartInformation.setKi(Double.valueOf(tfKi.getText()));
-            forRequestStartInformation.setCosf(Double.valueOf(tfCosf.getText()));
-            forRequestStartInformation.setTgf(Double.valueOf(tfTgf.getText()));
-        } catch (Exception e) {
-            taMessage.setText("Write values in all fields");
-            throw new RuntimeException("Write values in all fields");
+    public void startInformation(ActionEvent actionEvent) throws IOException {
+        if (actionEvent.getSource() == addEquipment) {
+            addEquipment();
+        } else if (actionEvent.getSource() == updateEquipment) {
+            updateEquipment();
+        } else if (actionEvent.getSource() == refreshTable) {
+            refreshTable();
+        } else if (actionEvent.getSource() == deleteEquipment) {
+            deleteEquipment();
         }
+    }
 
-        String value = objectMapper.writeValueAsString(forRequestStartInformation);
+    public void addEquipment() throws IOException {
 
-        HttpPost post = new HttpPost("http://localhost:9999//startinformation/create");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String value = makeRequestAsString(objectMapper, "create");
+
+
+        HttpPost request = new HttpPost("http://localhost:9999//startinformation/create");
+        request.addHeader("content-type", "application/json");
+        request.setEntity(new StringEntity(value));
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+             CloseableHttpResponse response = httpClient.execute(request)) {
+            HttpEntity entity = response.getEntity();
+            String responseEntity = EntityUtils.toString(entity);
+            try {
+                ErrorResponseMessage errorResponseMessage = objectMapper.readValue(responseEntity, ErrorResponseMessage.class);
+                taMessage.setText(errorResponseMessage.getMessage());
+
+            } catch (Exception e) {
+                showInfo(objectMapper, responseEntity);
+                taMessage.setText("Information about equipment " +
+                        "\n with id № " + tfId.getText()  + " is saved");
+            }
+        } catch (HttpHostConnectException e) {
+            taMessage.setText("Unable to connect \n" + request.getURI());
+        }
+    }
+
+    public void refreshTable() throws IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        HttpGet get = new HttpGet("http://localhost:9999//startinformation/all");
+        get.addHeader("content-type", "application/json");
+
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+             CloseableHttpResponse response = httpClient.execute(get)) {
+            HttpEntity entity = response.getEntity();
+            String responseEntity = EntityUtils.toString(entity);
+            showInfo(objectMapper, responseEntity);
+
+            try {
+                ErrorResponseMessage errorResponseMessage = objectMapper.readValue(responseEntity, ErrorResponseMessage.class);
+                taMessage.setText(errorResponseMessage.getMessage());
+            } catch (Exception e) {
+                taMessage.setText("Table refreshed");
+            }
+        } catch (HttpHostConnectException e) {
+            taMessage.setText("Unable to connect \n" + get.getURI());
+        }
+    }
+
+    public void updateEquipment() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String value = makeRequestAsString(objectMapper, "update");
+
+        HttpPost post = new HttpPost("http://localhost:9999//startinformation/update");
         post.addHeader("content-type", "application/json");
         post.setEntity(new StringEntity(value));
 
@@ -119,48 +170,80 @@ public class AddAllForStartController {
                 taMessage.setText(errorResponseMessage.getMessage());
 
             } catch (Exception e) {
-                ObservableList<StartInformationResponse> startInformationResponses = refreshTable(objectMapper, responseEntity);
-                tvEquipments.setItems(startInformationResponses);
-
-                taMessage.setText("Information about new equipment with id № " + forRequestStartInformation.getStartInformId() +
-                        "\n  name: " + forRequestStartInformation.getName() +
-                        "\n  power: " + forRequestStartInformation.getPower() +
-                        "\n  amount: " + forRequestStartInformation.getAmount() +
-                        "\n  ki: " + forRequestStartInformation.getKi() +
-                        "\n  cosf: " + forRequestStartInformation.getCosf() +
-                        "\n  tgf: " + forRequestStartInformation.getTgf() +
-                        "\nis saved");
+                showInfo(objectMapper, responseEntity);
+                taMessage.setText("Information about equipment" +
+                        "\n with id № " + tfId.getText() +" has been updated");
             }
         } catch (HttpHostConnectException e) {
             taMessage.setText("Unable to connect \n" + post.getURI());
         }
-
     }
 
-    public void getStartInformation(ActionEvent actionEvent) throws IOException {
+    private void deleteEquipment() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
+        String value = makeRequestAsString(objectMapper, "delete");
 
-        HttpGet get = new HttpGet("http://localhost:9999//startinformation/all");
-        get.addHeader("content-type", "application/json");
-
+        HttpDelete request = new HttpDelete("http://localhost:9999//startinformation/delete" + "/" + value);
+        request.addHeader("content-type", "application/json");
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
-             CloseableHttpResponse response = httpClient.execute(get)) {
+             CloseableHttpResponse response = httpClient.execute(request)) {
             HttpEntity entity = response.getEntity();
             String responseEntity = EntityUtils.toString(entity);
-            ObservableList<StartInformationResponse> startInformationResponses = refreshTable(objectMapper, responseEntity);
-            tvEquipments.setItems(startInformationResponses);
             try {
-                taMessage.setText("Table refreshed");
-            } catch (Exception e) {
                 ErrorResponseMessage errorResponseMessage = objectMapper.readValue(responseEntity, ErrorResponseMessage.class);
                 taMessage.setText(errorResponseMessage.getMessage());
+
+            } catch (Exception e) {
+                showInfo(objectMapper, responseEntity);
+                taMessage.setText("Information about equipment " +
+                        "\n with id №" + tfId.getText() + " has been deleted");
             }
         } catch (HttpHostConnectException e) {
-            taMessage.setText("Unable to connect \n" + get.getURI());
+            taMessage.setText("Unable to connect \n" + request.getURI());
+
         }
     }
 
-    public ObservableList<StartInformationResponse> refreshTable(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
+
+
+    public String makeRequestAsString(ObjectMapper objectMapper, String requestType) {
+        try {
+            if (requestType == "delete") {
+                return tfId.getText();
+            } else {
+                ForRequestStartInformation forRequestStartInformation = new ForRequestStartInformation();
+
+                forRequestStartInformation.setStartInformId(Long.valueOf(tfId.getText()));
+                forRequestStartInformation.setName(tfName.getText().trim());
+                forRequestStartInformation.setPower(Double.valueOf(tfPower.getText()));
+                forRequestStartInformation.setAmount(Integer.valueOf(tfAmount.getText()));
+                forRequestStartInformation.setKi(Double.valueOf(tfKi.getText()));
+                forRequestStartInformation.setCosf(Double.valueOf(tfCosf.getText()));
+                forRequestStartInformation.setTgf(Double.valueOf(tfTgf.getText()));
+                return objectMapper.writeValueAsString(forRequestStartInformation);
+            }
+
+        } catch (Exception e) {
+            taMessage.setText("Write values in all fields");
+            throw new RuntimeException("Write values in all fields");
+        }
+
+    }
+
+    public ObservableList<StartInformationResponse> getStartInformationList(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
+
+        ObservableList<StartInformationResponse> observableList = FXCollections.observableArrayList();
+
+        ForInsertInTableView forInsertInTableView = objectMapper.readValue(responseEntity, ForInsertInTableView.class);
+
+        for (int i = 0; i < forInsertInTableView.getList().size(); i++) {
+            observableList.add(forInsertInTableView.getList().get(i));
+        }
+        return observableList;
+    }
+
+    public void showInfo(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
+        ObservableList<StartInformationResponse> list = getStartInformationList(objectMapper, responseEntity);
 
         colID.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Long>("startInformId"));
         colName.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, String>("name"));
@@ -172,14 +255,9 @@ public class AddAllForStartController {
         colAvgDailyActivePower.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Double>("avgDailyActivePower"));
         colAvgDailyReactivePower.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Double>("avgDailyReactivePower"));
 
-        ObservableList<StartInformationResponse> observableList = FXCollections.observableArrayList();
-
-        ForInsertInTableView forInsertInTableView = objectMapper.readValue(responseEntity, ForInsertInTableView.class);
-
-        for (int i = 0; i < forInsertInTableView.getList().size(); i++) {
-            observableList.add(forInsertInTableView.getList().get(i));
-        }
-        return observableList;
+        tvEquipments.setItems(list);
 
     }
+
+
 }

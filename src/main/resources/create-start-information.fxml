@@ -67,7 +67,7 @@
       </children></VBox>
    <TableView fx:id="tvEquipments" layoutX="312.0" layoutY="91.0" prefHeight="500.0" prefWidth="700.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="40.0">
      <columns>
-       <TableColumn fx:id="colID" minWidth="50.0" prefWidth="50.0" text="ID" />
+       <TableColumn fx:id="colID"  minWidth="50.0" prefWidth="50.0" text="ID" />
        <TableColumn fx:id="colName" minWidth="150.0" prefWidth="150.0" text="Name" />
          <TableColumn fx:id="colPower" minWidth="70.0" prefWidth="70.0" text="Power" />
          <TableColumn fx:id="colAmount" minWidth="70.0" prefWidth="70.0" text="Amount" />
@@ -78,14 +78,14 @@
          <TableColumn fx:id="colAvgDailyReactivePower" minWidth="70.0" prefWidth="70.0" text="avg daily reactive power" />
      </columns>
       <columnResizePolicy>
-         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"  />
       </columnResizePolicy>
    </TableView>
-   <Button fx:id="addEquipment" layoutX="40.0" layoutY="343.0" mnemonicParsing="false" onAction="#addEquipment" prefHeight="25.0" prefWidth="70.0" text="CREATE" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="340.0" />
-   <Button fx:id="updateEquipment" layoutX="123.0" layoutY="343.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="UPDATE" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="340.0" />
-   <Button layoutX="198.0" layoutY="343.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="DELETE" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="340.0" />
+   <Button fx:id="addEquipment" layoutX="40.0" layoutY="343.0" mnemonicParsing="false" onAction="#startInformation" prefHeight="25.0" prefWidth="70.0" text="CREATE" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="340.0" />
+   <Button fx:id="updateEquipment" layoutX="123.0" layoutY="343.0" mnemonicParsing="false" onAction="#startInformation" prefHeight="25.0" prefWidth="70.0" text="UPDATE" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="340.0" />
+   <Button fx:id="deleteEquipment" layoutX="198.0" layoutY="343.0" mnemonicParsing="false" onAction="#startInformation" prefHeight="25.0" prefWidth="70.0" text="DELETE" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="340.0" />
    <TextArea fx:id="taMessage" blendMode="DARKEN" disable="true" layoutX="40.0" layoutY="386.0" prefHeight="200.0" prefWidth="230.0" text="INFORMATION AREA" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="415.0" />
-   <Button fx:id="refreshTable" layoutX="105.0" layoutY="381.0" mnemonicParsing="false" onAction="#getStartInformation" text="REFRESH TABLE" AnchorPane.topAnchor="380.0" />
+   <Button fx:id="refreshTable" layoutX="105.0" layoutY="381.0" mnemonicParsing="false" onAction="#startInformation" text="REFRESH TABLE" AnchorPane.topAnchor="380.0" />
 
 
 </AnchorPane>
