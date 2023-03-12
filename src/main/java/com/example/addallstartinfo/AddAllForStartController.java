@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -92,7 +93,7 @@ public class AddAllForStartController {
 
     public void startInformation(ActionEvent actionEvent) throws IOException {
         if (actionEvent.getSource() == addEquipment) {
-            addEquipment();
+            createEquipment();
         } else if (actionEvent.getSource() == updateEquipment) {
             updateEquipment();
         } else if (actionEvent.getSource() == refreshTable) {
@@ -102,7 +103,7 @@ public class AddAllForStartController {
         }
     }
 
-    public void addEquipment() throws IOException {
+    public void createEquipment() throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
         String value = makeRequestAsString(objectMapper, "create");
@@ -122,7 +123,7 @@ public class AddAllForStartController {
             } catch (Exception e) {
                 showInfo(objectMapper, responseEntity);
                 taMessage.setText("Information about equipment " +
-                        "\n with id № " + tfId.getText()  + " is saved");
+                        "\n with id № " + tfId.getText() + " is saved");
             }
         } catch (HttpHostConnectException e) {
             taMessage.setText("Unable to connect \n" + request.getURI());
@@ -172,7 +173,7 @@ public class AddAllForStartController {
             } catch (Exception e) {
                 showInfo(objectMapper, responseEntity);
                 taMessage.setText("Information about equipment" +
-                        "\n with id № " + tfId.getText() +" has been updated");
+                        "\n with id № " + tfId.getText() + " has been updated");
             }
         } catch (HttpHostConnectException e) {
             taMessage.setText("Unable to connect \n" + post.getURI());
@@ -203,6 +204,31 @@ public class AddAllForStartController {
 
         }
     }
+
+
+    public void handleMouseAction(MouseEvent mouseEvent) {
+        StartInformationResponse selectedItem  = tvEquipments.getSelectionModel().getSelectedItem();
+
+        tfId.setText(String.valueOf(selectedItem.getStartInformId()));
+        tfName.setText(selectedItem.getName());
+        tfPower.setText(String.valueOf(selectedItem.getPower()));
+        tfAmount.setText(String.valueOf(selectedItem.getAmount()));
+        tfKi.setText(String.valueOf(selectedItem.getKi()));
+        tfCosf.setText(String.valueOf(selectedItem.getCosf()));
+        tfTgf.setText(String.valueOf(selectedItem.getTgf()));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -258,6 +284,7 @@ public class AddAllForStartController {
         tvEquipments.setItems(list);
 
     }
+
 
 
 }
