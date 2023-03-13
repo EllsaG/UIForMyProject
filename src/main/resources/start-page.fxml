@@ -3,19 +3,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.startpage.StartPageController" stylesheets="styles.css">
+<AnchorPane prefHeight="600.0" prefWidth="1024.0" stylesheets="styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.startpage.StartPageController">
 
-    <MenuBar>
+    <MenuBar prefWidth="1024.0" style="-fx-background-color: #E0E0E0;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Menu text="File">
             <MenuItem onAction="#menuItemFileExitAction" text="Exit" />
         </Menu>
     </MenuBar>
 
-    <ListView VBox.vgrow="ALWAYS">
+
+    <VBox spacing="10.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="250.0">
         <Button fx:id="addEquipment" alignment="CENTER" onAction="#addEquipment" text="ADD EQUIPMENT" />
+        <Button fx:id="calculation" alignment="CENTER" onAction="#addEquipment" text="CALCULATE LOAD" />
+    </VBox>
 
 
-
-    </ListView>
-
-</VBox>
+</AnchorPane>

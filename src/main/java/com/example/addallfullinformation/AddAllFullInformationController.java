@@ -1,9 +1,9 @@
-package com.example.addallstartinfo;
+package com.example.addallfullinformation;
 
+import com.example.addallstartinfo.createstartinformation.ForInsertInTableView;
+import com.example.addallstartinfo.createstartinformation.ForRequestStartInformation;
 import com.example.response.ErrorResponseMessage;
 import com.example.response.StartInformationResponse;
-
-import com.example.addallstartinfo.createstartinformation.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Platform;
@@ -31,7 +31,8 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 
-public class AddAllForStartController {
+public class AddAllFullInformationController {
+
     @FXML
     TextField tfId;
     @FXML
@@ -109,7 +110,7 @@ public class AddAllForStartController {
         String value = makeRequestAsString(objectMapper, "create");
 
 
-        HttpPost request = new HttpPost("http://localhost:9999//startinformation/create");
+        HttpPost request = new HttpPost("http://localhost:9999//fullinformation/create");
         request.addHeader("content-type", "application/json");
         request.setEntity(new StringEntity(value));
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -134,7 +135,7 @@ public class AddAllForStartController {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        HttpGet get = new HttpGet("http://localhost:9999//startinformation/all");
+        HttpGet get = new HttpGet("http://localhost:9999//fullinformation/all");
         get.addHeader("content-type", "application/json");
 
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -158,7 +159,7 @@ public class AddAllForStartController {
         ObjectMapper objectMapper = new ObjectMapper();
         String value = makeRequestAsString(objectMapper, "update");
 
-        HttpPost post = new HttpPost("http://localhost:9999//startinformation/update");
+        HttpPost post = new HttpPost("http://localhost:9999//fullinformation/update");
         post.addHeader("content-type", "application/json");
         post.setEntity(new StringEntity(value));
 
@@ -184,7 +185,7 @@ public class AddAllForStartController {
         ObjectMapper objectMapper = new ObjectMapper();
         String value = makeRequestAsString(objectMapper, "delete");
 
-        HttpDelete request = new HttpDelete("http://localhost:9999//startinformation/delete" + "/" + value);
+        HttpDelete request = new HttpDelete("http://localhost:9999//fullinformation/delete" + "/" + value);
         request.addHeader("content-type", "application/json");
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
              CloseableHttpResponse response = httpClient.execute(request)) {
@@ -207,7 +208,7 @@ public class AddAllForStartController {
 
 
     public void handleMouseAction(MouseEvent mouseEvent) {
-        StartInformationResponse selectedItem  = tvEquipments.getSelectionModel().getSelectedItem();
+        StartInformationResponse selectedItem = tvEquipments.getSelectionModel().getSelectedItem();
 
         tfId.setText(String.valueOf(selectedItem.getStartInformId()));
         tfName.setText(selectedItem.getName());
@@ -217,19 +218,6 @@ public class AddAllForStartController {
         tfCosf.setText(String.valueOf(selectedItem.getCosf()));
         tfTgf.setText(String.valueOf(selectedItem.getTgf()));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public String makeRequestAsString(ObjectMapper objectMapper, String requestType) {
@@ -284,7 +272,5 @@ public class AddAllForStartController {
         tvEquipments.setItems(list);
 
     }
-
-
 
 }

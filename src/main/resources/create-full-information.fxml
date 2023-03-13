@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane minHeight="620" minWidth="1280" stylesheets="styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.addallfullinformation.AddAllFullInformationController">
+
+
+    <MenuBar style="-fx-background-color: #E0E0E0;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Menu text="Back">
+            <MenuItem onAction="#backToStartPage" text="Back" />
+        </Menu>
+        <Menu text="File">
+            <MenuItem onAction="#menuItemFileExitAction" text="Exit" />
+        </Menu>
+
+    </MenuBar>
+    <VBox layoutX="59.0" layoutY="91.0" prefHeight="70.0" prefWidth="76.0" spacing="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="70.0">
+        <Text text="ID">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Text text="Name">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+<!--        <Text text="Power">-->
+<!--            <font>-->
+<!--                <Font size="16.0" />-->
+<!--            </font>-->
+<!--        </Text>-->
+<!--        <Text text="Amount">-->
+<!--            <font>-->
+<!--                <Font size="16.0" />-->
+<!--            </font>-->
+<!--        </Text>-->
+<!--        <Text text="ki">-->
+<!--            <font>-->
+<!--                <Font size="16.0" />-->
+<!--            </font>-->
+<!--        </Text>-->
+<!--        <Text text="cosf">-->
+<!--            <font>-->
+<!--                <Font size="16.0" />-->
+<!--            </font>-->
+<!--        </Text>-->
+<!--        <Text text="tgf">-->
+<!--            <font>-->
+<!--                <Font size="16.0" />-->
+<!--            </font>-->
+<!--        </Text>-->
+
+
+    </VBox>
+    <VBox layoutX="135.0" layoutY="91.0" prefHeight="70.0" prefWidth="120.0" spacing="11.0" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="70.0">
+        <children>
+            <TextField fx:id="tfId" />
+            <TextField fx:id="tfName" />
+<!--            <TextField fx:id="tfPower" />-->
+<!--            <TextField fx:id="tfAmount" />-->
+<!--            <TextField fx:id="tfKi" />-->
+<!--            <TextField fx:id="tfCosf" />-->
+<!--            <TextField fx:id="tfTgf" />-->
+        </children>
+    </VBox>
+    <TableView fx:id="tvEquipments" layoutX="312.0" layoutY="91.0" onMouseClicked="#handleMouseAction" prefHeight="500.0" prefWidth="700.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0">
+
+
+        <columns>
+            <TableColumn fx:id="colID" minWidth="15.0" prefWidth="15.0" text="ID" />
+            <TableColumn fx:id="colName" minWidth="150.0" prefWidth="150.0" text="Name" />
+            <TableColumn fx:id="colAmount" minWidth="40.0" prefWidth="70.0" text="Amount" />
+        </columns>
+        <columns>
+            <TableColumn fx:id="colPower" minWidth="70.0" prefWidth="70.0" text="Active power">
+                <columns>
+                    <TableColumn fx:id="colOne" minWidth="40.0" prefWidth="40.0" text="One" />
+                    <TableColumn fx:id="colGroup" minWidth="40.0" prefWidth="40.0" text="Group" />
+                </columns>
+            </TableColumn>
+        </columns>
+<columns>
+    <TableColumn fx:id="colModule" minWidth="25.0" prefWidth="25.0" text="module" />
+    <TableColumn fx:id="colKi" minWidth="25.0" prefWidth="25.0" text="ki" />
+    <TableColumn fx:id="colCosf" minWidth="25.0" prefWidth="25.0" text="cosf" />
+    <TableColumn fx:id="colTgf" minWidth="25.0" prefWidth="25.0" text="tgf" />
+</columns>
+        <columns>
+            <TableColumn fx:id="colAvgDailyPower" minWidth="70.0" prefWidth="70.0" text="avg daily power">
+                <columns>
+                    <TableColumn fx:id="colAvgDailyActivePower" minWidth="35.0" prefWidth="70.0" text="active" />
+                    <TableColumn fx:id="colAvgDailyReactivePower" minWidth="35.0" prefWidth="70.0" text="reactive" />
+                </columns>
+            </TableColumn>
+        </columns>
+
+
+        <columns>
+            <TableColumn fx:id="colEffectiveAmountOfEquipment" minWidth="40.0" prefWidth="70.0" text="Effective  amount of equipment" />
+            <TableColumn fx:id="colKmax" minWidth="35.0" prefWidth="35.0" text="Coeff max" />
+        </columns>
+        <columns>
+            <TableColumn fx:id="colMaxPower" minWidth="100.0" prefWidth="100.0" text="max power">
+                <columns>
+                    <TableColumn fx:id="colActivePower" minWidth="35.0" prefWidth="70.0" text="active" />
+                    <TableColumn fx:id="colReactivePower" minWidth="35.0" prefWidth="70.0" text="reactive" />
+                    <TableColumn fx:id="colFullPower" minWidth="35.0" prefWidth="70.0" text="full" />
+                </columns>
+            </TableColumn>
+        </columns>
+        <columns>
+            <TableColumn fx:id="colMaxCurrent" minWidth="40.0" prefWidth="40.0" text="Max">
+                <columns>
+                    <TableColumn fx:id="" minWidth="40.0" prefWidth="70.0" text="current" />
+                </columns>
+            </TableColumn>
+
+        </columns>
+
+
+
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+        </columnResizePolicy>
+    </TableView>
+    <Button fx:id="addEquipment" layoutX="40.0" layoutY="343.0" mnemonicParsing="false" onAction="#startInformation" prefHeight="25.0" prefWidth="85.0" text="CREATE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="340.0">
+        <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@pictures/icons8_add_32px.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
+    <Button fx:id="updateEquipment" layoutX="123.0" layoutY="343.0" mnemonicParsing="false" onAction="#startInformation" prefHeight="25.0" prefWidth="85.0" text="UPDATE" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="340.0">
+        <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@pictures/icons8_update_32px.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
+    <Button fx:id="deleteEquipment" layoutX="198.0" layoutY="343.0" mnemonicParsing="false" onAction="#startInformation" prefHeight="25.0" prefWidth="85.0" text="DELETE" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="380.0">
+        <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@pictures/icons8_cancel_32px.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
+    <TextArea fx:id="taMessage" blendMode="DARKEN" disable="true" layoutX="69.0" layoutY="415.0" prefHeight="200.0" prefWidth="180.0" text="INFORMATION AREA" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="460.0" />
+    <Button fx:id="refreshTable" layoutX="105.0" layoutY="381.0" mnemonicParsing="false" onAction="#startInformation" text="REFRESH TABLE" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="420.0">
+        <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@pictures/icons8_refresh_32px_2.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
+   <VBox layoutX="13.0" layoutY="140.0" prefHeight="200.0" prefWidth="100.0" />
+
+
+</AnchorPane>
