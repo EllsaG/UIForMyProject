@@ -1,11 +1,18 @@
 package com.example.addallfullinformation.createfullinformation;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class ListInputEquipment {
     private Long numberOfBusbar;
-    private Long numberOfEquipment;
-    private Integer amountOfEquipment;
+    private Long numbersOfEquipment;
+    private Integer amountOfEquipments;
+
+    public ListInputEquipment(Long numberOfBusbar, Long numbersOfEquipment, Integer amountOfEquipments) {
+        this.numberOfBusbar = numberOfBusbar;
+        this.numbersOfEquipment = numbersOfEquipment;
+        this.amountOfEquipments = amountOfEquipments;
+    }
+
+    public ListInputEquipment() {
+    }
 
     public Long getNumberOfBusbar() {
         return numberOfBusbar;
@@ -15,19 +22,28 @@ public class ListInputEquipment {
         this.numberOfBusbar = numberOfBusbar;
     }
 
-    public Long getNumberOfEquipment() {
-        return numberOfEquipment;
+    public Long getNumbersOfEquipment() {
+        return numbersOfEquipment;
     }
 
-    public void setNumberOfEquipment(Long numberOfEquipment) {
-        this.numberOfEquipment = numberOfEquipment;
+    public void setNumbersOfEquipment(Long numbersOfEquipment) {
+        this.numbersOfEquipment = numbersOfEquipment;
     }
 
-    public Integer getAmountOfEquipment() {
-        return amountOfEquipment;
+    public Integer getAmountOfEquipments() {
+        return amountOfEquipments;
     }
 
-    public void setAmountOfEquipment(Integer amountOfEquipment) {
-        this.amountOfEquipment = amountOfEquipment;
+    public void setAmountOfEquipments(Integer amountOfEquipments) {
+        this.amountOfEquipments = amountOfEquipments;
+    }
+
+    @Override
+    public String toString() {
+        return "ListInputEquipment{" +
+                "numberOfBusbar=" + numberOfBusbar +
+                ", numberOfEquipment=" + numbersOfEquipment +
+                ", amountOfEquipment=" + amountOfEquipments +
+                '}';
     }
 }

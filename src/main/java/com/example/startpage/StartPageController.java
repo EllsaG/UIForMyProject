@@ -15,7 +15,8 @@ import java.io.IOException;
 public class StartPageController {
     @FXML
     private Button addEquipment;
-    @FXML Button getStartInformation;
+    @FXML
+    private Button calculation;
 
 
     public void menuItemFileExitAction(ActionEvent actionEvent) {
@@ -27,15 +28,18 @@ public class StartPageController {
 
         Stage stage = (Stage) addEquipment.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/create-start-information.fxml"));
-        stage.setTitle("Load Calculation");
+        stage.setTitle("Start Information");
         stage.setScene(new Scene(root));
 
     }
 
-    public void getStartInformation(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) getStartInformation.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/create-start-information.fxml"));
-        stage.setTitle("Load Calculation");
+    public void calculation(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) calculation.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/create-full-information.fxml"));
+        stage.setTitle("Full Information");
         stage.setScene(new Scene(root));
+
     }
+
+
 }

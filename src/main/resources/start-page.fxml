@@ -14,7 +14,7 @@
 
     <VBox spacing="10.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="250.0">
         <Button fx:id="addEquipment" alignment="CENTER" onAction="#addEquipment" text="ADD EQUIPMENT" />
-        <Button fx:id="calculation" alignment="CENTER" onAction="#addEquipment" text="CALCULATE LOAD" />
+        <Button fx:id="calculation" alignment="CENTER" onAction="#calculation" text="CALCULATE LOAD" />
     </VBox>
 
 

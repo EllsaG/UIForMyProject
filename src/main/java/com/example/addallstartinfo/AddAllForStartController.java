@@ -50,23 +50,23 @@ public class AddAllForStartController {
     @FXML
     TableView<StartInformationResponse> tvEquipments;
     @FXML
-    TableColumn<ForInsertInTableView, Long> colID;
+    TableColumn<ForInsertInTableViewStartInfo, Long> colID;
     @FXML
-    TableColumn<ForInsertInTableView, String> colName;
+    TableColumn<ForInsertInTableViewStartInfo, String> colName;
     @FXML
-    TableColumn<ForInsertInTableView, Double> colPower;
+    TableColumn<ForInsertInTableViewStartInfo, Double> colPower;
     @FXML
-    TableColumn<ForInsertInTableView, Integer> colAmount;
+    TableColumn<ForInsertInTableViewStartInfo, Integer> colAmount;
     @FXML
-    TableColumn<ForInsertInTableView, Double> colKi;
+    TableColumn<ForInsertInTableViewStartInfo, Double> colKi;
     @FXML
-    TableColumn<ForInsertInTableView, Double> colCosf;
+    TableColumn<ForInsertInTableViewStartInfo, Double> colCosf;
     @FXML
-    TableColumn<ForInsertInTableView, Double> colTgf;
+    TableColumn<ForInsertInTableViewStartInfo, Double> colTgf;
     @FXML
-    TableColumn<ForInsertInTableView, Double> colAvgDailyActivePower;
+    TableColumn<ForInsertInTableViewStartInfo, Double> colAvgDailyActivePower;
     @FXML
-    TableColumn<ForInsertInTableView, Double> colAvgDailyReactivePower;
+    TableColumn<ForInsertInTableViewStartInfo, Double> colAvgDailyReactivePower;
 
     @FXML
     Button addEquipment;
@@ -246,6 +246,7 @@ public class AddAllForStartController {
                 forRequestStartInformation.setKi(Double.valueOf(tfKi.getText()));
                 forRequestStartInformation.setCosf(Double.valueOf(tfCosf.getText()));
                 forRequestStartInformation.setTgf(Double.valueOf(tfTgf.getText()));
+
                 return objectMapper.writeValueAsString(forRequestStartInformation);
             }
 
@@ -260,10 +261,10 @@ public class AddAllForStartController {
 
         ObservableList<StartInformationResponse> observableList = FXCollections.observableArrayList();
 
-        ForInsertInTableView forInsertInTableView = objectMapper.readValue(responseEntity, ForInsertInTableView.class);
+        ForInsertInTableViewStartInfo forInsertInTableViewStartInfo = objectMapper.readValue(responseEntity, ForInsertInTableViewStartInfo.class);
 
-        for (int i = 0; i < forInsertInTableView.getList().size(); i++) {
-            observableList.add(forInsertInTableView.getList().get(i));
+        for (int i = 0; i < forInsertInTableViewStartInfo.getList().size(); i++) {
+            observableList.add(forInsertInTableViewStartInfo.getList().get(i));
         }
         return observableList;
     }
@@ -271,15 +272,15 @@ public class AddAllForStartController {
     public void showInfo(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
         ObservableList<StartInformationResponse> list = getStartInformationList(objectMapper, responseEntity);
 
-        colID.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Long>("startInformId"));
-        colName.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, String>("name"));
-        colPower.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Double>("power"));
-        colAmount.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Integer>("amount"));
-        colKi.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Double>("ki"));
-        colCosf.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Double>("cosf"));
-        colTgf.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Double>("tgf"));
-        colAvgDailyActivePower.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Double>("avgDailyActivePower"));
-        colAvgDailyReactivePower.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Double>("avgDailyReactivePower"));
+        colID.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Long>("startInformId"));
+        colName.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, String>("name"));
+        colPower.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Double>("power"));
+        colAmount.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Integer>("amount"));
+        colKi.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Double>("ki"));
+        colCosf.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Double>("cosf"));
+        colTgf.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Double>("tgf"));
+        colAvgDailyActivePower.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Double>("avgDailyActivePower"));
+        colAvgDailyReactivePower.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Double>("avgDailyReactivePower"));
 
         tvEquipments.setItems(list);
 

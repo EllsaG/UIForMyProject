@@ -1,9 +1,11 @@
 package com.example.addallfullinformation;
 
-import com.example.addallstartinfo.createstartinformation.ForInsertInTableView;
-import com.example.addallstartinfo.createstartinformation.ForRequestStartInformation;
+import com.example.addallfullinformation.createfullinformation.ForInsertInTableViewFullInfo;
+import com.example.addallfullinformation.createfullinformation.ForRequestFullInformation;
+import com.example.addallfullinformation.createfullinformation.ListInputEquipment;
+import com.example.addallstartinfo.createstartinformation.ForInsertInTableViewStartInfo;
 import com.example.response.ErrorResponseMessage;
-import com.example.response.StartInformationResponse;
+import com.example.response.FullInformationResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Platform;
@@ -30,56 +32,118 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddAllFullInformationController {
 
     @FXML
-    TextField tfId;
-    @FXML
-    TextField tfName;
-    @FXML
-    TextField tfPower;
-    @FXML
-    TextField tfAmount;
-    @FXML
-    TextField tfKi;
-    @FXML
-    TextField tfCosf;
-    @FXML
-    TextField tfTgf;
+    private Button addEquipment;
 
     @FXML
-    TableView<StartInformationResponse> tvEquipments;
-    @FXML
-    TableColumn<ForInsertInTableView, Long> colID;
-    @FXML
-    TableColumn<ForInsertInTableView, String> colName;
-    @FXML
-    TableColumn<ForInsertInTableView, Double> colPower;
-    @FXML
-    TableColumn<ForInsertInTableView, Integer> colAmount;
-    @FXML
-    TableColumn<ForInsertInTableView, Double> colKi;
-    @FXML
-    TableColumn<ForInsertInTableView, Double> colCosf;
-    @FXML
-    TableColumn<ForInsertInTableView, Double> colTgf;
-    @FXML
-    TableColumn<ForInsertInTableView, Double> colAvgDailyActivePower;
-    @FXML
-    TableColumn<ForInsertInTableView, Double> colAvgDailyReactivePower;
+    private Button deleteEquipment;
 
     @FXML
-    Button addEquipment;
-    @FXML
-    Button refreshTable;
-    @FXML
-    Button updateEquipment;
-    @FXML
-    Button deleteEquipment;
+    private Button refreshTable;
 
     @FXML
-    TextArea taMessage;
+    private TextArea taMessage;
+
+    @FXML
+    private TextField tfAmount1;
+
+    @FXML
+    private TextField tfAmount2;
+
+    @FXML
+    private TextField tfAmount3;
+
+    @FXML
+    private TextField tfAmount4;
+
+    @FXML
+    private TextField tfAmount5;
+
+    @FXML
+    private TextField tfAmount6;
+
+    @FXML
+    private TextField tfAmount7;
+
+    @FXML
+    private TextField tfAmount8;
+
+    @FXML
+    private TextField tfId;
+
+    @FXML
+    private TextField tfName;
+
+    @FXML
+    private TextField tfNumber1;
+
+    @FXML
+    private TextField tfNumber2;
+
+    @FXML
+    private TextField tfNumber3;
+
+    @FXML
+    private TextField tfNumber4;
+
+    @FXML
+    private TextField tfNumber5;
+
+    @FXML
+    private TextField tfNumber6;
+
+    @FXML
+    private TextField tfNumber7;
+
+    @FXML
+    private TextField tfNumber8;
+
+    @FXML
+    private Button updateEquipment;
+
+
+    @FXML
+    TableView<FullInformationResponse> tvEquipments;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Long> colID;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, String> colName;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Integer> colAmount;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Double> colPowerOfOne;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Double> colPowerOfGroup;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Double> colModule;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Double> colKi;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Double> colCosf;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Double> colTgf;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Double> colAvgDailyActivePower;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Double> colAvgDailyReactivePower;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Double> colEffectiveAmountOfEquipment;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Double> colKmax;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Double> colActivePower;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Double> colReactivePower;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Double> colFullPower;
+    @FXML
+    TableColumn<ForInsertInTableViewStartInfo, Double> colMaxCurrent;
+
 
     public void menuItemFileExitAction(ActionEvent actionEvent) {
         Platform.exit();
@@ -92,7 +156,7 @@ public class AddAllFullInformationController {
         stage.setScene(new Scene(root));
     }
 
-    public void startInformation(ActionEvent actionEvent) throws IOException {
+    public void fullInformation(ActionEvent actionEvent) throws IOException {
         if (actionEvent.getSource() == addEquipment) {
             createEquipment();
         } else if (actionEvent.getSource() == updateEquipment) {
@@ -208,33 +272,63 @@ public class AddAllFullInformationController {
 
 
     public void handleMouseAction(MouseEvent mouseEvent) {
-        StartInformationResponse selectedItem = tvEquipments.getSelectionModel().getSelectedItem();
+        FullInformationResponse selectedItem = tvEquipments.getSelectionModel().getSelectedItem();
 
-        tfId.setText(String.valueOf(selectedItem.getStartInformId()));
-        tfName.setText(selectedItem.getName());
-        tfPower.setText(String.valueOf(selectedItem.getPower()));
-        tfAmount.setText(String.valueOf(selectedItem.getAmount()));
-        tfKi.setText(String.valueOf(selectedItem.getKi()));
-        tfCosf.setText(String.valueOf(selectedItem.getCosf()));
-        tfTgf.setText(String.valueOf(selectedItem.getTgf()));
+//        tfId.setText(String.valueOf(selectedItem.getStartInformId()));
+//        tfName.setText(selectedItem.getName());
+
     }
 
+    public void showInfo(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
+        ObservableList<FullInformationResponse> list = getFullInformationList(objectMapper, responseEntity);
+
+        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("nameOfBusbar"));
+        colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        colPowerOfOne.setCellValueFactory(new PropertyValueFactory<>("powerOfOne"));
+        colPowerOfGroup.setCellValueFactory(new PropertyValueFactory<>("powerOfGroup"));
+        colModule.setCellValueFactory(new PropertyValueFactory<>("module"));
+        colKi.setCellValueFactory(new PropertyValueFactory<>("kI"));
+        colCosf.setCellValueFactory(new PropertyValueFactory<>("cosF"));
+        colTgf.setCellValueFactory(new PropertyValueFactory<>("tgF"));
+        colAvgDailyActivePower.setCellValueFactory(new PropertyValueFactory<>("avgDailyActivePower"));
+        colAvgDailyReactivePower.setCellValueFactory(new PropertyValueFactory<>("avgDailyReactivePower"));
+        colEffectiveAmountOfEquipment.setCellValueFactory(new PropertyValueFactory<>("effectiveAmountOfEquipment"));
+        colKmax.setCellValueFactory(new PropertyValueFactory<>("coefficientMax"));
+        colActivePower.setCellValueFactory(new PropertyValueFactory<>("maxActivePower"));
+        colReactivePower.setCellValueFactory(new PropertyValueFactory<>("maxReactivePower"));
+        colFullPower.setCellValueFactory(new PropertyValueFactory<>("maxFullPower"));
+        colMaxCurrent.setCellValueFactory(new PropertyValueFactory<>("maxElectricCurrent"));
+
+        tvEquipments.setItems(list);
+
+    }
 
     public String makeRequestAsString(ObjectMapper objectMapper, String requestType) {
         try {
             if (requestType.equals("delete")) {
                 return tfId.getText();
             } else {
-                ForRequestStartInformation forRequestStartInformation = new ForRequestStartInformation();
 
-                forRequestStartInformation.setStartInformId(Long.valueOf(tfId.getText()));
-                forRequestStartInformation.setName(tfName.getText().trim());
-                forRequestStartInformation.setPower(Double.valueOf(tfPower.getText()));
-                forRequestStartInformation.setAmount(Integer.valueOf(tfAmount.getText()));
-                forRequestStartInformation.setKi(Double.valueOf(tfKi.getText()));
-                forRequestStartInformation.setCosf(Double.valueOf(tfCosf.getText()));
-                forRequestStartInformation.setTgf(Double.valueOf(tfTgf.getText()));
-                return objectMapper.writeValueAsString(forRequestStartInformation);
+                ForRequestFullInformation forRequestFullInformation = new ForRequestFullInformation();
+
+                List<ListInputEquipment> list = new ArrayList<>();
+                forRequestFullInformation.setId(Long.valueOf(tfId.getText()));
+                forRequestFullInformation.setNameOfBusbar(tfName.getText().trim());
+                Long id = Long.valueOf(tfId.getText());
+
+                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber1.getText()), Integer.valueOf(tfAmount1.getText())));
+                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber2.getText()), Integer.valueOf(tfAmount2.getText())));
+                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber3.getText()), Integer.valueOf(tfAmount3.getText())));
+                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber4.getText()), Integer.valueOf(tfAmount4.getText())));
+//                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber5.getText()), Integer.valueOf(tfAmount5.getText())));
+//                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber6.getText()), Integer.valueOf(tfAmount6.getText())));
+//                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber7.getText()), Integer.valueOf(tfAmount7.getText())));
+//                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber8.getText()), Integer.valueOf(tfAmount8.getText())));
+
+                forRequestFullInformation.setNumbersAndAmountOfEquipments(list);
+
+                return objectMapper.writeValueAsString(forRequestFullInformation);
             }
 
         } catch (Exception e) {
@@ -244,33 +338,22 @@ public class AddAllFullInformationController {
 
     }
 
-    public ObservableList<StartInformationResponse> getStartInformationList(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
+    public ObservableList<FullInformationResponse> getFullInformationList(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
 
-        ObservableList<StartInformationResponse> observableList = FXCollections.observableArrayList();
+        ObservableList<FullInformationResponse> observableList = FXCollections.observableArrayList();
 
-        ForInsertInTableView forInsertInTableView = objectMapper.readValue(responseEntity, ForInsertInTableView.class);
+        ForInsertInTableViewFullInfo forInsertInTableViewFullInfo = objectMapper.readValue(responseEntity, ForInsertInTableViewFullInfo.class);
 
-        for (int i = 0; i < forInsertInTableView.getList().size(); i++) {
-            observableList.add(forInsertInTableView.getList().get(i));
+        for (int i = 0; i < forInsertInTableViewFullInfo.getList().size(); i++) {
+            observableList.add(forInsertInTableViewFullInfo.getList().get(i));
         }
         return observableList;
     }
 
-    public void showInfo(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
-        ObservableList<StartInformationResponse> list = getStartInformationList(objectMapper, responseEntity);
-
-        colID.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Long>("startInformId"));
-        colName.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, String>("name"));
-        colPower.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Double>("power"));
-        colAmount.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Integer>("amount"));
-        colKi.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Double>("ki"));
-        colCosf.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Double>("cosf"));
-        colTgf.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Double>("tgf"));
-        colAvgDailyActivePower.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Double>("avgDailyActivePower"));
-        colAvgDailyReactivePower.setCellValueFactory(new PropertyValueFactory<ForInsertInTableView, Double>("avgDailyReactivePower"));
-
-        tvEquipments.setItems(list);
-
-    }
 
 }
+
+
+
+
+

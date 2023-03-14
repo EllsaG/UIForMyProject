@@ -18,5 +18,7 @@ module com.example.uiformyproject {
     opens com.example.addallstartinfo to javafx.fxml;
     exports com.example.addallfullinformation;
     opens com.example.addallfullinformation to javafx.fxml;
+    exports com.example.addallfullinformation.createfullinformation;
+    opens com.example.addallfullinformation.createfullinformation to javafx.fxml;
 
 }
