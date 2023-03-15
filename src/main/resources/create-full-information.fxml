@@ -93,9 +93,9 @@
             </TableColumn>
         </columns>
         <columns>
-            <TableColumn fx:id="colMaxCurrent" minWidth="40.0" prefWidth="40.0" text="Max">
+            <TableColumn fx:id="" minWidth="40.0" prefWidth="40.0" text="Max">
                 <columns>
-                    <TableColumn fx:id="" minWidth="40.0" prefWidth="70.0" text="current"/>
+                    <TableColumn fx:id="colMaxCurrent" minWidth="40.0" prefWidth="70.0" text="current"/>
                 </columns>
             </TableColumn>
 

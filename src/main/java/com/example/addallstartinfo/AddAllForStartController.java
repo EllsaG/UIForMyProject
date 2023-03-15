@@ -30,6 +30,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class AddAllForStartController {
     @FXML
@@ -111,7 +112,7 @@ public class AddAllForStartController {
 
         HttpPost request = new HttpPost("http://localhost:9999//startinformation/create");
         request.addHeader("content-type", "application/json");
-        request.setEntity(new StringEntity(value));
+        request.setEntity(new StringEntity(value, StandardCharsets.UTF_8));
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
              CloseableHttpResponse response = httpClient.execute(request)) {
             HttpEntity entity = response.getEntity();
@@ -160,7 +161,7 @@ public class AddAllForStartController {
 
         HttpPost post = new HttpPost("http://localhost:9999//startinformation/update");
         post.addHeader("content-type", "application/json");
-        post.setEntity(new StringEntity(value));
+        post.setEntity(new StringEntity(value, StandardCharsets.UTF_8));
 
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
              CloseableHttpResponse response = httpClient.execute(post)) {

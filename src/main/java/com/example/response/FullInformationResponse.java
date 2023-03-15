@@ -6,7 +6,6 @@ public class FullInformationResponse {
     private Long id;
     private String nameOfBusbar;
     private Integer amount;
-    private Double module;
     private Double avgDailyActivePower;
     private Double avgDailyReactivePower;
     private Integer effectiveAmountOfEquipment;
@@ -18,8 +17,9 @@ public class FullInformationResponse {
     private Double powerOfGroup;
     private Double cosF;
     private Double tgF;
-    private Double kI;
-    private List<ListInputEquipmentResponse> listInputEquipmentResponses;
+    private Double ki;
+    private Double module;
+    private List<ListInputEquipmentResponse> fullStartInformId;
 
     public Long getId() {
         return id;
@@ -43,14 +43,6 @@ public class FullInformationResponse {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
-    }
-
-    public Double getModule() {
-        return module;
-    }
-
-    public void setModule(Double module) {
-        this.module = module;
     }
 
     public Double getAvgDailyActivePower() {
@@ -141,19 +133,27 @@ public class FullInformationResponse {
         this.tgF = tgF;
     }
 
-    public Double getkI() {
-        return kI;
+    public Double getKi() {
+        return ki;
     }
 
-    public void setkI(Double kI) {
-        this.kI = kI;
+    public void setKi(Double ki) {
+        this.ki = ki;
     }
 
-    public List<ListInputEquipmentResponse> getListInputEquipmentResponses() {
-        return listInputEquipmentResponses;
+    public Double getModule() {
+        return module;
     }
 
-    public void setListInputEquipmentResponses(List<ListInputEquipmentResponse> listInputEquipmentResponses) {
-        this.listInputEquipmentResponses = listInputEquipmentResponses;
+    public void setModule(Double module) {
+        this.module = module;
+    }
+
+    public List<ListInputEquipmentResponse> getFullStartInformId() {
+        return fullStartInformId;
+    }
+
+    public void setFullStartInformId(List<ListInputEquipmentResponse> fullStartInformId) {
+        this.fullStartInformId = fullStartInformId;
     }
 }

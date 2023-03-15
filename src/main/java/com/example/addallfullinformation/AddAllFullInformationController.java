@@ -3,7 +3,6 @@ package com.example.addallfullinformation;
 import com.example.addallfullinformation.createfullinformation.ForInsertInTableViewFullInfo;
 import com.example.addallfullinformation.createfullinformation.ForRequestFullInformation;
 import com.example.addallfullinformation.createfullinformation.ListInputEquipment;
-import com.example.addallstartinfo.createstartinformation.ForInsertInTableViewStartInfo;
 import com.example.response.ErrorResponseMessage;
 import com.example.response.FullInformationResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -32,6 +31,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,39 +110,39 @@ public class AddAllFullInformationController {
     @FXML
     TableView<FullInformationResponse> tvEquipments;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Long> colID;
+    TableColumn<ForInsertInTableViewFullInfo, Long> colID;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, String> colName;
+    TableColumn<ForInsertInTableViewFullInfo, String> colName;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Integer> colAmount;
+    TableColumn<ForInsertInTableViewFullInfo, Integer> colAmount;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Double> colPowerOfOne;
+    TableColumn<ForInsertInTableViewFullInfo, Double> colPowerOfOne;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Double> colPowerOfGroup;
+    TableColumn<ForInsertInTableViewFullInfo, Double> colPowerOfGroup;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Double> colModule;
+    TableColumn<ForInsertInTableViewFullInfo, Double> colModule;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Double> colKi;
+    TableColumn<ForInsertInTableViewFullInfo, Double> colKi;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Double> colCosf;
+    TableColumn<ForInsertInTableViewFullInfo, Double> colCosf;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Double> colTgf;
+    TableColumn<ForInsertInTableViewFullInfo, Double> colTgf;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Double> colAvgDailyActivePower;
+    TableColumn<ForInsertInTableViewFullInfo, Double> colAvgDailyActivePower;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Double> colAvgDailyReactivePower;
+    TableColumn<ForInsertInTableViewFullInfo, Double> colAvgDailyReactivePower;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Double> colEffectiveAmountOfEquipment;
+    TableColumn<ForInsertInTableViewFullInfo, Double> colEffectiveAmountOfEquipment;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Double> colKmax;
+    TableColumn<ForInsertInTableViewFullInfo, Double> colKmax;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Double> colActivePower;
+    TableColumn<ForInsertInTableViewFullInfo, Double> colActivePower;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Double> colReactivePower;
+    TableColumn<ForInsertInTableViewFullInfo, Double> colReactivePower;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Double> colFullPower;
+    TableColumn<ForInsertInTableViewFullInfo, Double> colFullPower;
     @FXML
-    TableColumn<ForInsertInTableViewStartInfo, Double> colMaxCurrent;
+    TableColumn<ForInsertInTableViewFullInfo, Double> colMaxCurrent;
 
 
     public void menuItemFileExitAction(ActionEvent actionEvent) {
@@ -176,7 +176,7 @@ public class AddAllFullInformationController {
 
         HttpPost request = new HttpPost("http://localhost:9999//fullinformation/create");
         request.addHeader("content-type", "application/json");
-        request.setEntity(new StringEntity(value));
+        request.setEntity(new StringEntity(value, StandardCharsets.UTF_8));
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
              CloseableHttpResponse response = httpClient.execute(request)) {
             HttpEntity entity = response.getEntity();
@@ -225,7 +225,7 @@ public class AddAllFullInformationController {
 
         HttpPost post = new HttpPost("http://localhost:9999//fullinformation/update");
         post.addHeader("content-type", "application/json");
-        post.setEntity(new StringEntity(value));
+        post.setEntity(new StringEntity(value, StandardCharsets.UTF_8));
 
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
              CloseableHttpResponse response = httpClient.execute(post)) {
@@ -288,7 +288,7 @@ public class AddAllFullInformationController {
         colPowerOfOne.setCellValueFactory(new PropertyValueFactory<>("powerOfOne"));
         colPowerOfGroup.setCellValueFactory(new PropertyValueFactory<>("powerOfGroup"));
         colModule.setCellValueFactory(new PropertyValueFactory<>("module"));
-        colKi.setCellValueFactory(new PropertyValueFactory<>("kI"));
+        colKi.setCellValueFactory(new PropertyValueFactory<>("ki"));
         colCosf.setCellValueFactory(new PropertyValueFactory<>("cosF"));
         colTgf.setCellValueFactory(new PropertyValueFactory<>("tgF"));
         colAvgDailyActivePower.setCellValueFactory(new PropertyValueFactory<>("avgDailyActivePower"));
