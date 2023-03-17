@@ -220,19 +220,6 @@ public class AddAllForStartController {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     public String makeRequestAsString(ObjectMapper objectMapper, String requestType) {
         try {
             if (requestType.equals("delete")) {
@@ -273,15 +260,15 @@ public class AddAllForStartController {
     public void showInfo(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
         ObservableList<StartInformationResponse> list = getStartInformationList(objectMapper, responseEntity);
 
-        colID.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Long>("startInformId"));
-        colName.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, String>("name"));
-        colPower.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Double>("power"));
-        colAmount.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Integer>("amount"));
-        colKi.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Double>("ki"));
-        colCosf.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Double>("cosf"));
-        colTgf.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Double>("tgf"));
-        colAvgDailyActivePower.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Double>("avgDailyActivePower"));
-        colAvgDailyReactivePower.setCellValueFactory(new PropertyValueFactory<ForInsertInTableViewStartInfo, Double>("avgDailyReactivePower"));
+        colID.setCellValueFactory(new PropertyValueFactory<>("startInformId"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colPower.setCellValueFactory(new PropertyValueFactory<>("power"));
+        colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        colKi.setCellValueFactory(new PropertyValueFactory<>("ki"));
+        colCosf.setCellValueFactory(new PropertyValueFactory<>("cosf"));
+        colTgf.setCellValueFactory(new PropertyValueFactory<>("tgf"));
+        colAvgDailyActivePower.setCellValueFactory(new PropertyValueFactory<>("avgDailyActivePower"));
+        colAvgDailyReactivePower.setCellValueFactory(new PropertyValueFactory<>("avgDailyReactivePower"));
 
         tvEquipments.setItems(list);
 

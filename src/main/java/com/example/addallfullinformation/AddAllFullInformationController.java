@@ -5,6 +5,7 @@ import com.example.addallfullinformation.createfullinformation.ForRequestFullInf
 import com.example.addallfullinformation.createfullinformation.ListInputEquipment;
 import com.example.response.ErrorResponseMessage;
 import com.example.response.FullInformationResponse;
+import com.example.response.ListInputEquipmentResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Platform;
@@ -274,8 +275,8 @@ public class AddAllFullInformationController {
     public void handleMouseAction(MouseEvent mouseEvent) {
         FullInformationResponse selectedItem = tvEquipments.getSelectionModel().getSelectedItem();
 
-//        tfId.setText(String.valueOf(selectedItem.getStartInformId()));
-//        tfName.setText(selectedItem.getName());
+        tfId.setText(String.valueOf(selectedItem.getId()));
+
 
     }
 
@@ -285,7 +286,7 @@ public class AddAllFullInformationController {
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("nameOfBusbar"));
         colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        colPowerOfOne.setCellValueFactory(new PropertyValueFactory<>("powerOfOne"));
+        colPowerOfOne.setCellValueFactory(new PropertyValueFactory<>("power"));
         colPowerOfGroup.setCellValueFactory(new PropertyValueFactory<>("powerOfGroup"));
         colModule.setCellValueFactory(new PropertyValueFactory<>("module"));
         colKi.setCellValueFactory(new PropertyValueFactory<>("ki"));
@@ -316,15 +317,19 @@ public class AddAllFullInformationController {
                 forRequestFullInformation.setId(Long.valueOf(tfId.getText()));
                 forRequestFullInformation.setNameOfBusbar(tfName.getText().trim());
                 Long id = Long.valueOf(tfId.getText());
+                try {
+                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber1.getText()), Integer.valueOf(tfAmount1.getText())));
+                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber2.getText()), Integer.valueOf(tfAmount2.getText())));
+                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber3.getText()), Integer.valueOf(tfAmount3.getText())));
+                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber4.getText()), Integer.valueOf(tfAmount4.getText())));
+                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber5.getText()), Integer.valueOf(tfAmount5.getText())));
+                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber6.getText()), Integer.valueOf(tfAmount6.getText())));
+                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber7.getText()), Integer.valueOf(tfAmount7.getText())));
+                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber8.getText()), Integer.valueOf(tfAmount8.getText())));
+                } catch (Exception e) {
 
-                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber1.getText()), Integer.valueOf(tfAmount1.getText())));
-                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber2.getText()), Integer.valueOf(tfAmount2.getText())));
-                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber3.getText()), Integer.valueOf(tfAmount3.getText())));
-                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber4.getText()), Integer.valueOf(tfAmount4.getText())));
-//                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber5.getText()), Integer.valueOf(tfAmount5.getText())));
-//                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber6.getText()), Integer.valueOf(tfAmount6.getText())));
-//                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber7.getText()), Integer.valueOf(tfAmount7.getText())));
-//                list.add(new ListInputEquipment(id, Long.valueOf(tfNumber8.getText()), Integer.valueOf(tfAmount8.getText())));
+                }
+
 
                 forRequestFullInformation.setNumbersAndAmountOfEquipments(list);
 
@@ -345,8 +350,26 @@ public class AddAllFullInformationController {
         ForInsertInTableViewFullInfo forInsertInTableViewFullInfo = objectMapper.readValue(responseEntity, ForInsertInTableViewFullInfo.class);
 
         for (int i = 0; i < forInsertInTableViewFullInfo.getList().size(); i++) {
+            for (int j = 0; j < forInsertInTableViewFullInfo.getList().get(i).getFullStartInformId().size(); j++) {
+                ListInputEquipmentResponse listInput = forInsertInTableViewFullInfo.getList().get(i).getFullStartInformId().get(j);
+                FullInformationResponse fullInformationResponse = new FullInformationResponse();
+                fullInformationResponse.setId(listInput.getStartInformId());
+                fullInformationResponse.setNameOfBusbar(listInput.getName());
+                fullInformationResponse.setAmount(listInput.getAmount());
+                fullInformationResponse.setAvgDailyActivePower(listInput.getAvgDailyActivePower());
+                fullInformationResponse.setAvgDailyReactivePower(listInput.getAvgDailyReactivePower());
+                fullInformationResponse.setPowerOfGroup(listInput.getPowerOfGroup());
+                fullInformationResponse.setPower(listInput.getPower());
+                fullInformationResponse.setCosF(listInput.getCosf());
+                fullInformationResponse.setTgF(listInput.getTgf());
+                fullInformationResponse.setKi(listInput.getKi());
+
+                observableList.add(fullInformationResponse);
+            }
+
             observableList.add(forInsertInTableViewFullInfo.getList().get(i));
         }
+
         return observableList;
     }
 

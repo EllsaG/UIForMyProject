@@ -14,6 +14,7 @@ public class FullInformationResponse {
     private Double maxReactivePower;
     private Double maxFullPower;
     private Double maxElectricCurrent;
+    private Double power;
     private Double powerOfGroup;
     private Double cosF;
     private Double tgF;
@@ -27,6 +28,14 @@ public class FullInformationResponse {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Double getPower() {
+        return power;
+    }
+
+    public void setPower(Double power) {
+        this.power = power;
     }
 
     public String getNameOfBusbar() {
