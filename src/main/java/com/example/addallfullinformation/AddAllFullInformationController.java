@@ -3,6 +3,7 @@ package com.example.addallfullinformation;
 import com.example.addallfullinformation.createfullinformation.ForInsertInTableViewFullInfo;
 import com.example.addallfullinformation.createfullinformation.ForRequestFullInformation;
 import com.example.addallfullinformation.createfullinformation.ListInputEquipment;
+import com.example.addallstartinfo.AddAllForStartApplication;
 import com.example.response.ErrorResponseMessage;
 import com.example.response.FullInformationResponse;
 import com.example.response.ListInputEquipmentResponse;
@@ -155,6 +156,11 @@ public class AddAllFullInformationController {
         Parent root = FXMLLoader.load(getClass().getResource("/start-page.fxml"));
         stage.setTitle("Start Page");
         stage.setScene(new Scene(root));
+    }
+
+    public void openStartTable(ActionEvent actionEvent) throws IOException {
+        AddAllForStartApplication addAllForStartApplication = new AddAllForStartApplication();
+        addAllForStartApplication.start(new Stage());
     }
 
     public void fullInformation(ActionEvent actionEvent) throws IOException {
@@ -372,6 +378,7 @@ public class AddAllFullInformationController {
 
         return observableList;
     }
+
 
 
 }

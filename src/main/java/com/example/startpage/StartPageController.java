@@ -38,7 +38,6 @@ public class StartPageController {
         Parent root = FXMLLoader.load(getClass().getResource("/create-full-information.fxml"));
         stage.setTitle("Full Information");
         stage.setScene(new Scene(root));
-
     }
 
 
