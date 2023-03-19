@@ -32,7 +32,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-public class AddAllForStartController {
+public class AddAllStartInformationController {
     @FXML
     TextField tfId;
     @FXML

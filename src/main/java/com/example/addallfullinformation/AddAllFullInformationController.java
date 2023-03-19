@@ -3,7 +3,7 @@ package com.example.addallfullinformation;
 import com.example.addallfullinformation.createfullinformation.ForInsertInTableViewFullInfo;
 import com.example.addallfullinformation.createfullinformation.ForRequestFullInformation;
 import com.example.addallfullinformation.createfullinformation.ListInputEquipment;
-import com.example.addallstartinfo.AddAllForStartApplication;
+import com.example.addallstartinfo.AddAllStartInformationApplication;
 import com.example.response.ErrorResponseMessage;
 import com.example.response.FullInformationResponse;
 import com.example.response.ListInputEquipmentResponse;
@@ -41,73 +41,50 @@ public class AddAllFullInformationController {
 
     @FXML
     private Button addEquipment;
-
     @FXML
     private Button deleteEquipment;
-
     @FXML
     private Button refreshTable;
-
     @FXML
     private TextArea taMessage;
-
     @FXML
     private TextField tfAmount1;
-
     @FXML
     private TextField tfAmount2;
-
     @FXML
     private TextField tfAmount3;
-
     @FXML
     private TextField tfAmount4;
-
     @FXML
     private TextField tfAmount5;
-
     @FXML
     private TextField tfAmount6;
-
     @FXML
     private TextField tfAmount7;
-
     @FXML
     private TextField tfAmount8;
-
     @FXML
     private TextField tfId;
-
     @FXML
     private TextField tfName;
-
     @FXML
     private TextField tfNumber1;
-
     @FXML
     private TextField tfNumber2;
-
     @FXML
     private TextField tfNumber3;
-
     @FXML
     private TextField tfNumber4;
-
     @FXML
     private TextField tfNumber5;
-
     @FXML
     private TextField tfNumber6;
-
     @FXML
     private TextField tfNumber7;
-
     @FXML
     private TextField tfNumber8;
-
     @FXML
     private Button updateEquipment;
-
 
     @FXML
     TableView<FullInformationResponse> tvEquipments;
@@ -159,8 +136,8 @@ public class AddAllFullInformationController {
     }
 
     public void openStartTable(ActionEvent actionEvent) throws IOException {
-        AddAllForStartApplication addAllForStartApplication = new AddAllForStartApplication();
-        addAllForStartApplication.start(new Stage());
+        AddAllStartInformationApplication addAllStartInformationApplication = new AddAllStartInformationApplication();
+        addAllStartInformationApplication.start(new Stage());
     }
 
     public void fullInformation(ActionEvent actionEvent) throws IOException {
@@ -273,17 +250,38 @@ public class AddAllFullInformationController {
             }
         } catch (HttpHostConnectException e) {
             taMessage.setText("Unable to connect \n" + request.getURI());
-
         }
     }
 
 
     public void handleMouseAction(MouseEvent mouseEvent) {
         FullInformationResponse selectedItem = tvEquipments.getSelectionModel().getSelectedItem();
-
+        List<ListInputEquipmentResponse> fullStartInformId = selectedItem.getFullStartInformId();
         tfId.setText(String.valueOf(selectedItem.getId()));
+        tfName.setText(String.valueOf(selectedItem.getNameOfBusbar()));
+        try {
+            tfNumber1.setText(String.valueOf(fullStartInformId.get(0).getStartInformId()));
+            tfNumber2.setText(String.valueOf(fullStartInformId.get(1).getStartInformId()));
+            tfNumber3.setText(String.valueOf(fullStartInformId.get(2).getStartInformId()));
+            tfNumber4.setText(String.valueOf(fullStartInformId.get(3).getStartInformId()));
+            tfNumber5.setText(String.valueOf(fullStartInformId.get(4).getStartInformId()));
+            tfNumber6.setText(String.valueOf(fullStartInformId.get(5).getStartInformId()));
+            tfNumber7.setText(String.valueOf(fullStartInformId.get(6).getStartInformId()));
+            tfNumber8.setText(String.valueOf(fullStartInformId.get(7).getStartInformId()));
+        } catch (Exception e) {
+        }
 
-
+        try {
+            tfAmount1.setText(String.valueOf(fullStartInformId.get(0).getAmount()));
+            tfAmount2.setText(String.valueOf(fullStartInformId.get(1).getAmount()));
+            tfAmount3.setText(String.valueOf(fullStartInformId.get(2).getAmount()));
+            tfAmount4.setText(String.valueOf(fullStartInformId.get(3).getAmount()));
+            tfAmount5.setText(String.valueOf(fullStartInformId.get(4).getAmount()));
+            tfAmount6.setText(String.valueOf(fullStartInformId.get(5).getAmount()));
+            tfAmount7.setText(String.valueOf(fullStartInformId.get(6).getAmount()));
+            tfAmount8.setText(String.valueOf(fullStartInformId.get(7).getAmount()));
+        } catch (Exception e) {
+        }
     }
 
     public void showInfo(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
@@ -316,7 +314,6 @@ public class AddAllFullInformationController {
             if (requestType.equals("delete")) {
                 return tfId.getText();
             } else {
-
                 ForRequestFullInformation forRequestFullInformation = new ForRequestFullInformation();
 
                 List<ListInputEquipment> list = new ArrayList<>();
@@ -333,12 +330,8 @@ public class AddAllFullInformationController {
                     list.add(new ListInputEquipment(id, Long.valueOf(tfNumber7.getText()), Integer.valueOf(tfAmount7.getText())));
                     list.add(new ListInputEquipment(id, Long.valueOf(tfNumber8.getText()), Integer.valueOf(tfAmount8.getText())));
                 } catch (Exception e) {
-
                 }
-
-
                 forRequestFullInformation.setNumbersAndAmountOfEquipments(list);
-
                 return objectMapper.writeValueAsString(forRequestFullInformation);
             }
 
@@ -346,7 +339,6 @@ public class AddAllFullInformationController {
             taMessage.setText("Write values in all fields");
             throw new RuntimeException("Write values in all fields");
         }
-
     }
 
     public ObservableList<FullInformationResponse> getFullInformationList(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
@@ -372,13 +364,10 @@ public class AddAllFullInformationController {
 
                 observableList.add(fullInformationResponse);
             }
-
             observableList.add(forInsertInTableViewFullInfo.getList().get(i));
         }
-
         return observableList;
     }
-
 
 
 }

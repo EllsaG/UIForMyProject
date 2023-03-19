@@ -8,10 +8,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AddAllForStartApplication extends Application {
+public class AddAllStartInformationApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AddAllForStartApplication.class.getResource("/create-start-information.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(AddAllStartInformationApplication.class.getResource("/create-start-information.fxml"));
         stage.setTitle("Start Information");
         stage.setScene( new Scene(fxmlLoader.load(), 1024, 600));
         stage.show();
