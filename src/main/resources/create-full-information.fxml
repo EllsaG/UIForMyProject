@@ -43,7 +43,7 @@
 
 
         <columns>
-            <TableColumn fx:id="colID" minWidth="15.0" prefWidth="15.0" text="ID" />
+            <TableColumn fx:id="colID" minWidth="5.0" prefWidth="5.0" text="ID" />
             <TableColumn fx:id="colName" minWidth="150.0" prefWidth="150.0" text="Name" />
             <TableColumn fx:id="colAmount" minWidth="40.0" prefWidth="70.0" text="Amount" />
         </columns>

@@ -1,5 +1,6 @@
 package com.example.startpage;
 
+import com.example.addallstartinfo.AddAllStartInformationApplication;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,4 +42,10 @@ public class StartPageController {
     }
 
 
+    public void lighting(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) calculation.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/create-lighting-information.fxml"));
+        stage.setTitle("Lighting Information");
+        stage.setScene(new Scene(root));
+    }
 }
