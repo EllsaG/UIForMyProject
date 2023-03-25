@@ -107,7 +107,8 @@ public class AddLightingInformationController {
 
     public void fullInformation(ActionEvent actionEvent) {
     }
-
+    public void refreshTable(ActionEvent actionEvent) {
+    }
     @FXML
     void handleMouseAction(MouseEvent event) {
 
