@@ -2,18 +2,18 @@ package com.example.addligthinginformation.createligthinformation;
 
 
 
-public class ForRequestLightingInfo {
+public class ForRequestChooseLuminaire {
     private double heightProductionHall;
     private double widthProductionHall;
     private double lengthProductionHall;
 
-    public ForRequestLightingInfo(double heightProductionHall, double widthProductionHall, double lengthProductionHall) {
+    public ForRequestChooseLuminaire(double heightProductionHall, double widthProductionHall, double lengthProductionHall) {
         this.heightProductionHall = heightProductionHall;
         this.widthProductionHall = widthProductionHall;
         this.lengthProductionHall = lengthProductionHall;
     }
 
-    public ForRequestLightingInfo() {
+    public ForRequestChooseLuminaire() {
     }
 
     public double getHeightProductionHall() {

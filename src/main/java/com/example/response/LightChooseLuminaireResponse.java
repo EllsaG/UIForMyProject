@@ -2,11 +2,11 @@ package com.example.response;
 
 import java.util.HashMap;
 
-public class LightInformationResponse {
+public class LightChooseLuminaireResponse {
 
     HashMap<Integer, HashMap<Double,Double>> lightFluxAtAmountOfLamps;
 
-    public LightInformationResponse() {
+    public LightChooseLuminaireResponse() {
     }
 
     public HashMap<Integer, HashMap<Double, Double>> getLightFluxAtAmountOfLamps() {

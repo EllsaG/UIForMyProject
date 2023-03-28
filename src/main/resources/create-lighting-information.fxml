@@ -19,7 +19,7 @@
 
     </MenuBar>
 
-    <Accordion layoutX="9.0" layoutY="33.0" prefWidth="200" stylesheets="lighting.css">
+    <Accordion layoutX="9.0" layoutY="33.0" prefWidth="200" >
         <panes>
             <TitledPane animated="true" minWidth="220.0" prefWidth="220.0" text="Choosing luminaire">
                 <content>
@@ -114,7 +114,7 @@
                                     <TextField fx:id="tfModelOfLamp" />
                                     <TextField fx:id="tfAmountOfLampsInOneLuminaire" />
                                     <TextField fx:id="tfLightFluxOneLamp" />
-                                    <TextField fx:id="tfFctivePowerOneLamp" />
+                                    <TextField fx:id="tfActivePowerOneLamp" />
                                 </children>
                                 <HBox.margin>
                                     <Insets left="10.0" />
@@ -148,7 +148,7 @@
         <columns>
             <TableColumn fx:id="colAmountLuminairesPerLengthAndWidth" minWidth="70.0" prefWidth="70.0" text="amount luminaires">
                 <columns>
-                    <TableColumn fx:id="colAmountOfLuminairesЕщефд" minWidth="45.0" prefWidth="45.0" text="total" />
+                    <TableColumn fx:id="colAmountOfLuminairesTotal" minWidth="45.0" prefWidth="45.0" text="total" />
                     <TableColumn fx:id="colAmountLuminairesPerLength" minWidth="35.0" prefWidth="70.0" text="per length" />
                     <TableColumn fx:id="colAmountLuminairesPerWidth" minWidth="35.0" prefWidth="70.0" text="per width" />
                 </columns>
@@ -206,7 +206,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button fx:id="addNewLighting" onAction="#addNewLighting" layoutX="40.0" layoutY="343.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="85.0" text="CREATE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="340.0">
+            <Button fx:id="createNewLighting" onAction="#createNewLighting" layoutX="40.0" layoutY="343.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="85.0" text="CREATE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="340.0">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -221,7 +221,7 @@
         </HBox>
         <HBox layoutX="10.0" layoutY="10.0" spacing="10.0">
             <children>
-                <Button fx:id="addChooseLuminare" onAction="#chooseLuminare" layoutX="123.0" layoutY="343.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="CHOOSE L" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="340.0" />
+                <Button fx:id="addChooseLuminaire" onAction="#chooseLuminaire" layoutX="123.0" layoutY="343.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="CHOOSE L" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="340.0" />
 
 
                 <Button fx:id="deleteLighting" mnemonicParsing="false" onAction="#deleteLighting" prefHeight="25.0" prefWidth="85.0" text="DELETE">
@@ -256,53 +256,5 @@
     </VBox>
 
     <TextArea fx:id="taMessage" blendMode="DARKEN" disable="true" layoutX="69.0" layoutY="415.0" prefHeight="200.0" prefWidth="180.0" text="INFORMATION AREA" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="530.0" />
-
-
-    <!--    <HBox layoutX="13.0" layoutY="350.0" prefHeight="200.0" prefWidth="200.0" spacing="10">-->
-    <!--        <VBox spacing="5.0">-->
-    <!--            <Text text="Number">-->
-    <!--                <font>-->
-    <!--                    <Font size="14.0"/>-->
-    <!--                </font>-->
-    <!--                <VBox.margin>-->
-    <!--                    <Insets left="15.0"/>-->
-    <!--                </VBox.margin>-->
-    <!--            </Text>-->
-    <!--            <TextField fx:id="tfNumber1" minWidth="50" prefWidth="80.0"/>-->
-    <!--            <TextField fx:id="tfNumber2" minWidth="50" prefWidth="80.0"/>-->
-    <!--            <TextField fx:id="tfNumber3" minWidth="50" prefWidth="80.0"/>-->
-    <!--            <TextField fx:id="tfNumber4" minWidth="50" prefWidth="80.0"/>-->
-    <!--            <TextField fx:id="tfNumber5" minWidth="50" prefWidth="80.0"/>-->
-    <!--            <TextField fx:id="tfNumber6" layoutX="10.0" layoutY="156.0" minWidth="50" prefWidth="80.0"/>-->
-    <!--            <TextField fx:id="tfNumber7" layoutX="10.0" layoutY="186.0" minWidth="50" prefWidth="80.0"/>-->
-    <!--            <TextField fx:id="tfNumber8" layoutX="10.0" layoutY="216.0" minWidth="50" prefWidth="80.0"/>-->
-    <!--            <HBox.margin>-->
-    <!--                <Insets left="10.0"/>-->
-    <!--            </HBox.margin>-->
-    <!--        </VBox>-->
-    <!--        <VBox spacing="5.0">-->
-    <!--            <Text text="Amount">-->
-    <!--                <font>-->
-    <!--                    <Font size="14.0"/>-->
-    <!--                </font>-->
-    <!--                <VBox.margin>-->
-    <!--                    <Insets left="15.0"/>-->
-    <!--                </VBox.margin>-->
-    <!--            </Text>-->
-    <!--            <TextField fx:id="tfAmount1" minWidth="50" prefWidth="80.0"/>-->
-    <!--            <TextField fx:id="tfAmount2" minWidth="50" prefWidth="80.0"/>-->
-    <!--            <TextField fx:id="tfAmount3" minWidth="50" prefWidth="80.0"/>-->
-    <!--            <TextField fx:id="tfAmount4" minWidth="50" prefWidth="80.0"/>-->
-    <!--            <TextField fx:id="tfAmount5" minWidth="50" prefWidth="80.0"/>-->
-    <!--            <TextField fx:id="tfAmount6" minWidth="50" prefWidth="80.0"/>-->
-    <!--            <TextField fx:id="tfAmount7" layoutX="10.0" layoutY="186.0" minWidth="50" prefWidth="80.0"/>-->
-    <!--            <TextField fx:id="tfAmount8" layoutX="10.0" layoutY="216.0" minWidth="50" prefWidth="80.0"/>-->
-    <!--        </VBox>-->
-
-
-    <!--    </HBox>-->
-
-
-
 
 </AnchorPane>
