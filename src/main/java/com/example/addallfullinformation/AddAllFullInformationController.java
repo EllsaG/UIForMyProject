@@ -233,7 +233,7 @@ public class AddAllFullInformationController {
         ObjectMapper objectMapper = new ObjectMapper();
         String value = makeRequestAsString(objectMapper, "delete");
 
-        HttpDelete request = new HttpDelete("http://localhost:9999//fullinformation/delete" + "/" + value);
+        HttpDelete request = new HttpDelete("http://localhost:9999//fullinformation/delete/" + value);
         request.addHeader("content-type", "application/json");
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
              CloseableHttpResponse response = httpClient.execute(request)) {

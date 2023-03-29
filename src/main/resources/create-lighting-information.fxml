@@ -82,6 +82,11 @@
                     <VBox>
                         <HBox>
                             <VBox layoutX="59.0" layoutY="91.0" prefHeight="70.0" prefWidth="76.0" spacing="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="70.0">
+                                <Text text="ID">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Text>
                                 <Text text="Model of luminaire">
                                     <font>
                                         <Font size="14.0" />
@@ -110,6 +115,7 @@
                             </VBox>
                             <VBox layoutX="135.0" layoutY="91.0" prefHeight="70.0" prefWidth="90.0" spacing="11.0" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="70.0">
                                 <children>
+                                    <TextField fx:id="tfId" />
                                     <TextField fx:id="tfModelOfLuminaire" />
                                     <TextField fx:id="tfModelOfLamp" />
                                     <TextField fx:id="tfAmountOfLampsInOneLuminaire" />
@@ -197,7 +203,7 @@
 
     <VBox layoutX="13.0" layoutY="362.0" prefHeight="110.0" prefWidth="200.0" spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="420.0">
         <HBox spacing="10.0">
-            <Button fx:id="updateLighting" layoutX="123.0" layoutY="343.0" mnemonicParsing="false" onAction="#updateLighting" prefHeight="25.0" prefWidth="85.0" text="UPDATE" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="340.0">
+            <Button fx:id="updateLighting" layoutX="123.0" layoutY="343.0" mnemonicParsing="false" onAction="#lightingInformation" prefHeight="25.0" prefWidth="85.0" text="UPDATE" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="340.0">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -206,7 +212,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button fx:id="createNewLighting" onAction="#createNewLighting" layoutX="40.0" layoutY="343.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="85.0" text="CREATE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="340.0">
+            <Button fx:id="createNewLighting" onAction="#lightingInformation" layoutX="40.0" layoutY="343.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="85.0" text="CREATE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="340.0">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -221,10 +227,10 @@
         </HBox>
         <HBox layoutX="10.0" layoutY="10.0" spacing="10.0">
             <children>
-                <Button fx:id="addChooseLuminaire" onAction="#chooseLuminaire" layoutX="123.0" layoutY="343.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="CHOOSE L" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="340.0" />
+                <Button fx:id="addChooseLuminaire" onAction="#lightingInformation" layoutX="123.0" layoutY="343.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="CHOOSE L" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="340.0" />
 
 
-                <Button fx:id="deleteLighting" mnemonicParsing="false" onAction="#deleteLighting" prefHeight="25.0" prefWidth="85.0" text="DELETE">
+                <Button fx:id="deleteLighting" mnemonicParsing="false" onAction="#lightingInformation" prefHeight="25.0" prefWidth="85.0" text="DELETE">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -241,7 +247,7 @@
                 <Insets />
             </VBox.margin>
         </HBox>
-        <Button fx:id="refreshTable" layoutX="105.0" layoutY="381.0" mnemonicParsing="false" onAction="#refreshTable" text="REFRESH TABLE" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="420.0">
+        <Button fx:id="refreshTable" layoutX="105.0" layoutY="381.0" mnemonicParsing="false" onAction="#lightingInformation" text="REFRESH TABLE" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="420.0">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                     <image>

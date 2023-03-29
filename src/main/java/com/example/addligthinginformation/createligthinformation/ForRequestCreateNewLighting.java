@@ -4,14 +4,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ForRequestCreateNewLighting {
 
+    private Long lightingId;
     private String modelOfLuminaire;
     private String modelOfLamp;
     private int amountOfLampsInOneLuminaire;
     private double lightFluxOneLamp;
     private double activePowerOneLamp;
 
-    public ForRequestCreateNewLighting(String modelOfLuminaire, String modelOfLamp, int amountOfLampsInOneLuminaire,
-                                       double lightFluxOneLamp, double activePowerOneLamp) {
+    public ForRequestCreateNewLighting(long lightingId, String modelOfLuminaire, String modelOfLamp,
+                                       int amountOfLampsInOneLuminaire, double lightFluxOneLamp, double activePowerOneLamp) {
+        this.lightingId = lightingId;
         this.modelOfLuminaire = modelOfLuminaire;
         this.modelOfLamp = modelOfLamp;
         this.amountOfLampsInOneLuminaire = amountOfLampsInOneLuminaire;
@@ -20,6 +22,14 @@ public class ForRequestCreateNewLighting {
     }
 
     public ForRequestCreateNewLighting() {
+    }
+
+    public Long getLightingId() {
+        return lightingId;
+    }
+
+    public void setLightingId(Long lightingId) {
+        this.lightingId = lightingId;
     }
 
     public String getModelOfLuminaire() {

@@ -5,9 +5,7 @@ import com.example.addligthinginformation.createligthinformation.ForInsertInTabl
 import com.example.addligthinginformation.createligthinformation.ForInsertInTableViewLightingInfo;
 import com.example.addligthinginformation.createligthinformation.ForRequestChooseLuminaire;
 import com.example.addligthinginformation.createligthinformation.ForRequestCreateNewLighting;
-import com.example.response.ErrorResponseMessage;
-import com.example.response.LightChooseLuminaireResponse;
-import com.example.response.LightingCreateNewResponse;
+import com.example.response.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Platform;
@@ -28,6 +26,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.entity.StringEntity;
@@ -53,20 +53,18 @@ public class AddLightingInformationController {
     public TextField tfLightFluxOneLamp;
     @FXML
     public TextField tfActivePowerOneLamp;
+    @FXML
+    public TextField tfId;
+    @FXML
+    public Button addChooseLuminaire;
+    @FXML
+    public Button deleteLighting;
+    @FXML
+    public Button createNewLighting;
+    @FXML
+    public Button updateLighting;
+    public Button refreshTable;
 
-    @FXML
-    private Button addEquipment;
-
-    @FXML
-    private Button deleteEquipment;
-
-    @FXML
-    private Button openStartTable;
-
-    @FXML
-    private Button refreshTable;
-    @FXML
-    private Button updateEquipment;
 
     @FXML
     private TextArea taMessage;
@@ -83,53 +81,48 @@ public class AddLightingInformationController {
 
     @FXML
     private TableView<ForInsertInTableViewForChooseLuminaires> tvResponse;
-
     @FXML
     private TableColumn<ForInsertInTableViewForChooseLuminaires, Integer> colAmountLampsInLuminaire;
-
     @FXML
     private TableColumn<ForInsertInTableViewForChooseLuminaires, Double> colMin;
-
     @FXML
     private TableColumn<ForInsertInTableViewForChooseLuminaires, Double> colMax;
-
     @FXML
     TableView<LightingCreateNewResponse> tvLighting;
-
     @FXML
-    public TableColumn colID;
+    public TableColumn<LightingCreateNewResponse, Long> colID;
     @FXML
-    public TableColumn colModelOfLuminaire;
+    public TableColumn<LightingCreateNewResponse, String> colModelOfLuminaire;
     @FXML
-    public TableColumn colModelOfLamp;
+    public TableColumn<LightingCreateNewResponse, String> colModelOfLamp;
     @FXML
-    public TableColumn colPowerOfOneLamp;
+    public TableColumn<LightingCreateNewResponse, Double> colPowerOfOneLamp;
     @FXML
-    public TableColumn colLightFluxOfOneLamp;
+    public TableColumn<LightingCreateNewResponse, Double> colLightFluxOfOneLamp;
     @FXML
-    public TableColumn colAmountOfLuminairesTotal;
+    public TableColumn<LightingCreateNewResponse, Integer> colAmountOfLuminairesTotal;
     @FXML
-    public TableColumn colAmountLuminairesPerLength;
+    public TableColumn<LightingCreateNewResponse, Integer> colAmountLuminairesPerLength;
     @FXML
-    public TableColumn colAmountLuminairesPerWidth;
+    public TableColumn<LightingCreateNewResponse, Integer> colAmountLuminairesPerWidth;
     @FXML
-    public TableColumn colDistanceBetweenRowsOfLamps;
+    public TableColumn<LightingCreateNewResponse, Double> colDistanceBetweenRowsOfLamps;
     @FXML
-    public TableColumn colDistanceBetweenWallAndFirstRowOfLamps;
+    public TableColumn<LightingCreateNewResponse, Double> colDistanceBetweenWallAndFirstRowOfLamps;
     @FXML
-    public TableColumn colActivePower;
+    public TableColumn<LightingCreateNewResponse, Double> colActivePower;
     @FXML
-    public TableColumn colReactivePower;
+    public TableColumn<LightingCreateNewResponse, Double> colReactivePower;
     @FXML
-    public TableColumn colFullPower;
+    public TableColumn<LightingCreateNewResponse, Double> colFullPower;
     @FXML
-    public TableColumn colElectricCurrentFull;
+    public TableColumn<LightingCreateNewResponse, Double> colElectricCurrentFull;
     @FXML
-    public TableColumn colElectricCurrentOfOneRow;
+    public TableColumn<LightingCreateNewResponse, Double> colElectricCurrentOfOneRow;
     @FXML
-    public TableColumn colCosf;
+    public TableColumn<LightingCreateNewResponse, Double> colCosf;
     @FXML
-    public TableColumn colTgf;
+    public TableColumn<LightingCreateNewResponse, Double> colTgf;
 
 
     @FXML
@@ -140,57 +133,37 @@ public class AddLightingInformationController {
         stage.setScene(new Scene(root));
     }
 
-
-    public void refreshTable(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    void handleMouseAction(MouseEvent event) {
-
-    }
-
-    public void updateLighting(ActionEvent actionEvent) {
-    }
-
-
-    public void deleteLighting(ActionEvent actionEvent) {
-    }
-
     @FXML
     void menuItemFileExitAction(ActionEvent event) {
         Platform.exit();
     }
 
-
-    public void createNewLighting(ActionEvent actionEvent) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String value = makeRequestAsString(objectMapper, "create", "createNewLighting");
-
-
-        HttpPost request = new HttpPost("http://localhost:9999//lightinformation/create/createnewlighting");
-        request.addHeader("content-type", "application/json");
-        request.setEntity(new StringEntity(value, StandardCharsets.UTF_8));
-        try (CloseableHttpClient httpClient = HttpClients.createDefault();
-             CloseableHttpResponse response = httpClient.execute(request)) {
-            HttpEntity entity = response.getEntity();
-            String responseEntity = EntityUtils.toString(entity);
-            try {
-                ErrorResponseMessage errorResponseMessage = objectMapper.readValue(responseEntity, ErrorResponseMessage.class);
-                taMessage.setText(errorResponseMessage.getMessage());
-
-            } catch (Exception e) {
-                showInfo(objectMapper, responseEntity, "createNewLighting");
-                taMessage.setText("Information about amount " +
-                        "\n and light flux of lamps " +
-                        "\n for choose luminaires");
-            }
-        } catch (HttpHostConnectException e) {
-            taMessage.setText("Unable to connect \n" + request.getURI());
+    public void lightingInformation(ActionEvent actionEvent) throws IOException {
+        if (actionEvent.getSource() == addChooseLuminaire) {
+            chooseLuminaire();
+        }else if (actionEvent.getSource() == createNewLighting) {
+            createNewLighting();
+        } else if (actionEvent.getSource() == updateLighting) {
+            updateLighting();
+        } else if (actionEvent.getSource() == refreshTable) {
+            refreshTable();
+        } else if (actionEvent.getSource() == deleteLighting) {
+            deleteLighting();
         }
     }
 
+    @FXML
+    void handleMouseAction(MouseEvent event) {
+        LightingCreateNewResponse selectedItem = tvLighting.getSelectionModel().getSelectedItem();
+        tfId.setText(String.valueOf(selectedItem.getId()));
+        tfModelOfLuminaire.setText(selectedItem.getModelOfLuminaire());
+        tfModelOfLamp.setText(selectedItem.getModelOfLamp());
+        tfAmountOfLampsInOneLuminaire.setText(String.valueOf(selectedItem.getAmountOfLampsInOneLuminaire()));
+        tfLightFluxOneLamp.setText(String.valueOf(selectedItem.getLightFluxOfOneLamp()));
+        tfActivePowerOneLamp.setText(String.valueOf(selectedItem.getPowerOfOneLamp()));
+    }
 
-    public void chooseLuminaire(ActionEvent actionEvent) throws IOException {
+    public void chooseLuminaire() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         String value = makeRequestAsString(objectMapper, "create", "chooseLuminaire");
 
@@ -217,6 +190,110 @@ public class AddLightingInformationController {
         }
     }
 
+    public void createNewLighting() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String value = makeRequestAsString(objectMapper, "create", "createNewLighting");
+
+
+        HttpPost request = new HttpPost("http://localhost:9999//lightinformation/create/createnewlighting");
+        request.addHeader("content-type", "application/json");
+        request.setEntity(new StringEntity(value, StandardCharsets.UTF_8));
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+             CloseableHttpResponse response = httpClient.execute(request)) {
+            HttpEntity entity = response.getEntity();
+            String responseEntity = EntityUtils.toString(entity);
+            try {
+                ErrorResponseMessage errorResponseMessage = objectMapper.readValue(responseEntity, ErrorResponseMessage.class);
+                taMessage.setText(errorResponseMessage.getMessage());
+
+            } catch (Exception e) {
+                showInfo(objectMapper, responseEntity, "createNewLighting");
+                taMessage.setText("Information about lighting " +
+                        "\n with id № " + tfId.getText() +
+                        "\nis saved");
+            }
+        } catch (HttpHostConnectException e) {
+            taMessage.setText("Unable to connect \n" + request.getURI());
+        }
+    }
+
+    public void refreshTable() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        HttpGet get = new HttpGet("http://localhost:9999//lightinformation/all");
+        get.addHeader("content-type", "application/json");
+
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+             CloseableHttpResponse response = httpClient.execute(get)) {
+            HttpEntity entity = response.getEntity();
+            String responseEntity = EntityUtils.toString(entity);
+            showInfo(objectMapper, responseEntity, "refreshTable");
+
+            try {
+                ErrorResponseMessage errorResponseMessage = objectMapper.readValue(responseEntity, ErrorResponseMessage.class);
+                taMessage.setText(errorResponseMessage.getMessage());
+            } catch (Exception e) {
+                taMessage.setText("Table refreshed");
+            }
+        } catch (HttpHostConnectException e) {
+            taMessage.setText("Unable to connect \n" + get.getURI());
+        }
+    }
+
+    public void updateLighting() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String value = makeRequestAsString(objectMapper, "create", "updateLighting");
+
+        HttpPost post = new HttpPost("http://localhost:9999//lightinformation/update/insertnewluminaries");
+        post.addHeader("content-type", "application/json");
+        post.setEntity(new StringEntity(value, StandardCharsets.UTF_8));
+
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+             CloseableHttpResponse response = httpClient.execute(post)) {
+            HttpEntity entity = response.getEntity();
+            String responseEntity = EntityUtils.toString(entity);
+            try {
+                ErrorResponseMessage errorResponseMessage = objectMapper.readValue(responseEntity, ErrorResponseMessage.class);
+                taMessage.setText(errorResponseMessage.getMessage());
+
+            } catch (Exception e) {
+                showInfo(objectMapper, responseEntity, "updateLighting");
+                taMessage.setText("Information about lighting" +
+                        "\n with id № " + tfId.getText() +
+                        "\nhas been updated");
+            }
+        } catch (HttpHostConnectException e) {
+            taMessage.setText("Unable to connect \n" + post.getURI());
+        }
+    }
+
+    public void deleteLighting() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String value = makeRequestAsString(objectMapper, "delete", "deleteLighting");
+
+        HttpDelete post = new HttpDelete("http://localhost:9999//lightinformatiion/delete/" + value);
+        post.addHeader("content-type", "application/json");
+
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+             CloseableHttpResponse response = httpClient.execute(post)) {
+            HttpEntity entity = response.getEntity();
+            String responseEntity = EntityUtils.toString(entity);
+            try {
+                ErrorResponseMessage errorResponseMessage = objectMapper.readValue(responseEntity, ErrorResponseMessage.class);
+                taMessage.setText(errorResponseMessage.getMessage());
+
+            } catch (Exception e) {
+                showInfo(objectMapper, responseEntity, "deleteLighting");
+                taMessage.setText("Information about lighting" +
+                        "\n with id № " + tfId.getText() +
+                        "\nhas been updated");
+            }
+        } catch (HttpHostConnectException e) {
+            taMessage.setText("Unable to connect \n" + post.getURI());
+        }
+    }
+
+
     public String makeRequestAsString(ObjectMapper objectMapper, String requestType, String reasonForRequest) {
         if (reasonForRequest.equals("chooseLuminaire")) {
             try {
@@ -234,13 +311,14 @@ public class AddLightingInformationController {
                 taMessage.setText("Write values in all fields");
                 throw new RuntimeException("Write values in all fields");
             }
-        } else if (reasonForRequest.equals("createNewLighting")) {
+        } else {
             try {
                 if (requestType.equals("delete")) {
-                    return tfModelOfLuminaire.getText();
+                    return tfId.getText();
                 } else {
                     ForRequestCreateNewLighting forRequestCreateNewLighting = new ForRequestCreateNewLighting();
 
+                    forRequestCreateNewLighting.setLightingId(Long.valueOf(tfId.getText()));
                     forRequestCreateNewLighting.setModelOfLuminaire(tfModelOfLuminaire.getText());
                     forRequestCreateNewLighting.setModelOfLamp(tfModelOfLamp.getText());
                     forRequestCreateNewLighting.setAmountOfLampsInOneLuminaire(Integer.valueOf(tfAmountOfLampsInOneLuminaire.getText()));
@@ -254,7 +332,6 @@ public class AddLightingInformationController {
                 throw new RuntimeException("Write values in all fields");
             }
         }
-        return "";
     }
 
     public void showInfo(ObjectMapper objectMapper, String responseEntity, String reasonForRequest) throws JsonProcessingException {
@@ -266,7 +343,7 @@ public class AddLightingInformationController {
             colMax.setCellValueFactory(new PropertyValueFactory<>("maxLightFluxForChooseLuminaire"));
 
             tvResponse.setItems(list);
-        } else if (reasonForRequest.equals("createNewLighting")) {
+        } else {
             ObservableList<LightingCreateNewResponse> list = getCreateNewLightingInfo(objectMapper, responseEntity);
             colID.setCellValueFactory(new PropertyValueFactory<>("id"));
             colModelOfLuminaire.setCellValueFactory(new PropertyValueFactory<>("modelOfLuminaire"));
@@ -299,7 +376,7 @@ public class AddLightingInformationController {
             ForInsertInTableViewForChooseLuminaires forInsertInTableViewLightingInfo = new ForInsertInTableViewForChooseLuminaires();
             Set<Double> keys = lightChooseLuminaireResponse.getLightFluxAtAmountOfLamps().get(i).keySet();
             forInsertInTableViewLightingInfo.setAmountLamps(i);
-            double key = keys.iterator().next().doubleValue();
+            double key = keys.iterator().next();
             forInsertInTableViewLightingInfo.setMinLightFluxForChooseLuminaire(key);
             forInsertInTableViewLightingInfo.setMaxLightFluxForChooseLuminaire(lightChooseLuminaireResponse.getLightFluxAtAmountOfLamps().get(i).get(key));
             observableList.add(forInsertInTableViewLightingInfo);
@@ -318,40 +395,4 @@ public class AddLightingInformationController {
         return observableList;
     }
 
-    @Override
-    public String toString() {
-        return "AddLightingInformationController{" +
-                "addEquipment=" + addEquipment +
-                ", deleteEquipment=" + deleteEquipment +
-                ", openStartTable=" + openStartTable +
-                ", refreshTable=" + refreshTable +
-                ", updateEquipment=" + updateEquipment +
-                ", taMessage=" + taMessage +
-                ", tfHeightOfHall=" + tfHeightOfHall +
-                ", tfLengthOfHall=" + tfLengthOfHall +
-                ", tfWidthOfHall=" + tfWidthOfHall +
-                ", tvResponse=" + tvResponse +
-                ", colAmountLampsInLuminaire=" + colAmountLampsInLuminaire +
-                ", colMin=" + colMin +
-                ", colMax=" + colMax +
-                ", tvLighting=" + tvLighting +
-                ", colID=" + colID +
-                ", colModelOfLuminaire=" + colModelOfLuminaire +
-                ", colModelOfLamp=" + colModelOfLamp +
-                ", colPowerOfOneLamp=" + colPowerOfOneLamp +
-                ", colLightFluxOfOneLamp=" + colLightFluxOfOneLamp +
-                ", colAmountOfLuminairesTotal=" + colAmountOfLuminairesTotal +
-                ", colAmountLuminairesPerLength=" + colAmountLuminairesPerLength +
-                ", colAmountLuminairesPerWidth=" + colAmountLuminairesPerWidth +
-                ", colDistanceBetweenRowsOfLamps=" + colDistanceBetweenRowsOfLamps +
-                ", colDistanceBetweenWallAndFirstRowOfLamps=" + colDistanceBetweenWallAndFirstRowOfLamps +
-                ", colActivePower=" + colActivePower +
-                ", colReactivePower=" + colReactivePower +
-                ", colFullPower=" + colFullPower +
-                ", colElectricCurrentFull=" + colElectricCurrentFull +
-                ", colElectricCurrentOfOneRow=" + colElectricCurrentOfOneRow +
-                ", colCosf=" + colCosf +
-                ", colTgf=" + colTgf +
-                '}';
-    }
 }

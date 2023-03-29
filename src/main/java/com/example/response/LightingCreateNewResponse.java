@@ -18,8 +18,8 @@ public class LightingCreateNewResponse {
     private double fullPower;
     private double electricCurrent;
     private double electricCurrentOfOneRowOfLuminaire;
-    private Double cosF;
-    private Double tgF;
+    private double cosF;
+    private double tgF;
 
     public Long getId() {
         return id;
@@ -149,19 +149,19 @@ public class LightingCreateNewResponse {
         this.electricCurrentOfOneRowOfLuminaire = electricCurrentOfOneRowOfLuminaire;
     }
 
-    public Double getCosF() {
+    public double getCosF() {
         return cosF;
     }
 
-    public void setCosF(Double cosF) {
+    public void setCosF(double cosF) {
         this.cosF = cosF;
     }
 
-    public Double getTgF() {
+    public double getTgF() {
         return tgF;
     }
 
-    public void setTgF(Double tgF) {
+    public void setTgF(double tgF) {
         this.tgF = tgF;
     }
 }
