@@ -4,6 +4,7 @@ import com.example.response.ErrorResponseMessage;
 import com.example.response.StartInformationResponse;
 
 import com.example.addallstartinfo.createstartinformation.*;
+import com.example.utils.WrapTextTableCell;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Platform;
@@ -269,6 +270,8 @@ public class AddAllStartInformationController {
         colTgf.setCellValueFactory(new PropertyValueFactory<>("tgf"));
         colAvgDailyActivePower.setCellValueFactory(new PropertyValueFactory<>("avgDailyActivePower"));
         colAvgDailyReactivePower.setCellValueFactory(new PropertyValueFactory<>("avgDailyReactivePower"));
+
+        colName.setCellFactory((param) -> new WrapTextTableCell());
 
         tvEquipments.setItems(list);
 

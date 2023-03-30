@@ -7,6 +7,7 @@ import com.example.addallstartinfo.AddAllStartInformationApplication;
 import com.example.response.ErrorResponseMessage;
 import com.example.response.FullInformationResponse;
 import com.example.response.ListInputEquipmentResponse;
+import com.example.utils.WrapTextTableCell;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Platform;
@@ -304,6 +305,9 @@ public class AddAllFullInformationController {
         colReactivePower.setCellValueFactory(new PropertyValueFactory<>("maxReactivePower"));
         colFullPower.setCellValueFactory(new PropertyValueFactory<>("maxFullPower"));
         colMaxCurrent.setCellValueFactory(new PropertyValueFactory<>("maxElectricCurrent"));
+
+        colName.setCellFactory((param) -> new WrapTextTableCell());
+
 
         tvEquipments.setItems(list);
 

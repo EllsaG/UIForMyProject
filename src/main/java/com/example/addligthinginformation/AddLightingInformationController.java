@@ -6,6 +6,7 @@ import com.example.addligthinginformation.createligthinformation.ForInsertInTabl
 import com.example.addligthinginformation.createligthinformation.ForRequestChooseLuminaire;
 import com.example.addligthinginformation.createligthinformation.ForRequestCreateNewLighting;
 import com.example.response.*;
+import com.example.utils.WrapTextTableCell;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Platform;
@@ -16,11 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -42,7 +39,8 @@ import java.util.Set;
 
 public class AddLightingInformationController {
 
-
+    @FXML
+    public TextField tfChooseLuminareId;
     @FXML
     public TextField tfModelOfLuminaire;
     @FXML
@@ -301,6 +299,7 @@ public class AddLightingInformationController {
                     return tfHeightOfHall.getText();
                 } else {
                     ForRequestChooseLuminaire forRequestChooseLuminaire = new ForRequestChooseLuminaire();
+                    forRequestChooseLuminaire.setLightingId(Long.valueOf(tfChooseLuminareId.getText()));
                     forRequestChooseLuminaire.setHeightProductionHall(Double.valueOf(tfHeightOfHall.getText()));
                     forRequestChooseLuminaire.setLengthProductionHall(Double.valueOf(tfLengthOfHall.getText()));
                     forRequestChooseLuminaire.setWidthProductionHall(Double.valueOf(tfWidthOfHall.getText()));
@@ -363,6 +362,11 @@ public class AddLightingInformationController {
             colCosf.setCellValueFactory(new PropertyValueFactory<>("cosF"));
             colTgf.setCellValueFactory(new PropertyValueFactory<>("tgF"));
 
+            colModelOfLamp.setCellFactory((param) -> new WrapTextTableCell());
+            colModelOfLuminaire.setCellFactory((param) -> new WrapTextTableCell());
+
+
+
             tvLighting.setItems(list);
         }
     }
@@ -396,3 +400,5 @@ public class AddLightingInformationController {
     }
 
 }
+
+

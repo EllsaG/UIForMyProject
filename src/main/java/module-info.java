@@ -24,5 +24,7 @@ module com.example.uiformyproject {
     opens com.example.addligthinginformation to javafx.fxml;
     exports com.example.addligthinginformation.createligthinformation;
     opens com.example.addligthinginformation.createligthinformation to javafx.fxml;
+    exports com.example.utils;
+    opens com.example.utils to javafx.fxml;
 
 }
