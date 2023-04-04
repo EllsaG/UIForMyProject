@@ -4,25 +4,26 @@ package com.example.addallfullinformation.createfullinformation;
 import java.util.List;
 
 public class ForRequestFullInformation {
-    private Long id;
+    private long id;
     private String nameOfBusbar;
-
     private List<ListInputEquipment> numbersAndAmountOfEquipments;
 
-    public ForRequestFullInformation(Long id, String nameOfBusbar, List<ListInputEquipment> numbersAndAmountOfEquipments) {
+     ForRequestFullInformation(long id, String nameOfBusbar, List<ListInputEquipment> numbersAndAmountOfEquipments) {
         this.id = id;
         this.nameOfBusbar = nameOfBusbar;
         this.numbersAndAmountOfEquipments = numbersAndAmountOfEquipments;
     }
 
+
+
     public ForRequestFullInformation() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -42,12 +43,5 @@ public class ForRequestFullInformation {
         this.numbersAndAmountOfEquipments = numbersAndAmountOfEquipments;
     }
 
-    @Override
-    public String toString() {
-        return "ForRequestFullInformation{" +
-                "id=" + id +
-                ", nameOfBusbar='" + nameOfBusbar + '\'' +
-                ", numbersAndAmountOfEquipments=" + numbersAndAmountOfEquipments +
-                '}';
-    }
+
 }

@@ -1,9 +1,9 @@
 package com.example.response;
 
 public class ListInputEquipmentResponse {
-    private Long id;
-    private Long fullInformationId;
-    private Long startInformId;
+    private long id;
+    private long fullInformationId;
+    private long startInformId;
     private String name;
     private double power;
     private double powerOfGroup;
@@ -14,27 +14,27 @@ public class ListInputEquipmentResponse {
     private double avgDailyActivePower;
     private double avgDailyReactivePower;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Long getFullInformationId() {
+    public long getFullInformationId() {
         return fullInformationId;
     }
 
-    public void setFullInformationId(Long fullInformationId) {
+    public void setFullInformationId(long fullInformationId) {
         this.fullInformationId = fullInformationId;
     }
 
-    public Long getStartInformId() {
+    public long getStartInformId() {
         return startInformId;
     }
 
-    public void setStartInformId(Long startInformId) {
+    public void setStartInformId(long startInformId) {
         this.startInformId = startInformId;
     }
 

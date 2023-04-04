@@ -252,9 +252,7 @@ public class AddAllStartInformationController {
 
         ForInsertInTableViewStartInfo forInsertInTableViewStartInfo = objectMapper.readValue(responseEntity, ForInsertInTableViewStartInfo.class);
 
-        for (int i = 0; i < forInsertInTableViewStartInfo.getList().size(); i++) {
-            observableList.add(forInsertInTableViewStartInfo.getList().get(i));
-        }
+        observableList.addAll(forInsertInTableViewStartInfo.getList());
         return observableList;
     }
 

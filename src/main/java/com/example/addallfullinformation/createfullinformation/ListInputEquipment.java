@@ -1,11 +1,11 @@
 package com.example.addallfullinformation.createfullinformation;
 
 public class ListInputEquipment {
-    private Long numberOfBusbar;
-    private Long numbersOfEquipment;
-    private Integer amountOfEquipments;
+    private long numberOfBusbar;
+    private long numbersOfEquipment;
+    private int amountOfEquipments;
 
-    public ListInputEquipment(Long numberOfBusbar, Long numbersOfEquipment, Integer amountOfEquipments) {
+    public ListInputEquipment(long numberOfBusbar, long numbersOfEquipment, int amountOfEquipments) {
         this.numberOfBusbar = numberOfBusbar;
         this.numbersOfEquipment = numbersOfEquipment;
         this.amountOfEquipments = amountOfEquipments;
@@ -14,36 +14,29 @@ public class ListInputEquipment {
     public ListInputEquipment() {
     }
 
-    public Long getNumberOfBusbar() {
+    public long getNumberOfBusbar() {
         return numberOfBusbar;
     }
 
-    public void setNumberOfBusbar(Long numberOfBusbar) {
+    public void setNumberOfBusbar(long numberOfBusbar) {
         this.numberOfBusbar = numberOfBusbar;
     }
 
-    public Long getNumbersOfEquipment() {
+    public long getNumbersOfEquipment() {
         return numbersOfEquipment;
     }
 
-    public void setNumbersOfEquipment(Long numbersOfEquipment) {
+    public void setNumbersOfEquipment(long numbersOfEquipment) {
         this.numbersOfEquipment = numbersOfEquipment;
     }
 
-    public Integer getAmountOfEquipments() {
+    public int getAmountOfEquipments() {
         return amountOfEquipments;
     }
 
-    public void setAmountOfEquipments(Integer amountOfEquipments) {
+    public void setAmountOfEquipments(int amountOfEquipments) {
         this.amountOfEquipments = amountOfEquipments;
     }
 
-    @Override
-    public String toString() {
-        return "ListInputEquipment{" +
-                "numberOfBusbar=" + numberOfBusbar +
-                ", numberOfEquipment=" + numbersOfEquipment +
-                ", amountOfEquipment=" + amountOfEquipments +
-                '}';
-    }
+
 }

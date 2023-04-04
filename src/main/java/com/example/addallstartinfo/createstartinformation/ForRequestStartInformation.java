@@ -1,7 +1,7 @@
 package com.example.addallstartinfo.createstartinformation;
 
 public class ForRequestStartInformation {
-    private Long startInformId;
+    private long startInformId;
     private String name;
     private double power;
     private int amount;
@@ -9,7 +9,7 @@ public class ForRequestStartInformation {
     private double cosf;
     private double tgf;
 
-    public ForRequestStartInformation(Long startInformId, String name, double power, int amount, double ki, double cosf, double tgf) {
+    public ForRequestStartInformation(long startInformId, String name, double power, int amount, double ki, double cosf, double tgf) {
         this.startInformId = startInformId;
         this.name = name;
         this.power = power;
@@ -19,16 +19,14 @@ public class ForRequestStartInformation {
         this.tgf = tgf;
     }
 
-
-
     public ForRequestStartInformation() {
     }
 
-    public Long getStartInformId() {
+    public long getStartInformId() {
         return startInformId;
     }
 
-    public void setStartInformId(Long startInformId) {
+    public void setStartInformId(long startInformId) {
         this.startInformId = startInformId;
     }
 

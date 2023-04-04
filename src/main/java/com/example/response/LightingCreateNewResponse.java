@@ -2,7 +2,7 @@ package com.example.response;
 
 public class LightingCreateNewResponse {
 
-    private Long id;
+    private long id;
     private String modelOfLuminaire;
     private String modelOfLamp;
     private int amountOfLuminaires;
@@ -21,11 +21,11 @@ public class LightingCreateNewResponse {
     private double cosF;
     private double tgF;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

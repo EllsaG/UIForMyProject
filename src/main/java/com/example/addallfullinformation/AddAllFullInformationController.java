@@ -2,6 +2,7 @@ package com.example.addallfullinformation;
 
 import com.example.addallfullinformation.createfullinformation.ForInsertInTableViewFullInfo;
 import com.example.addallfullinformation.createfullinformation.ForRequestFullInformation;
+import com.example.addallfullinformation.createfullinformation.ForRequestFullInformationMainBusbar;
 import com.example.addallfullinformation.createfullinformation.ListInputEquipment;
 import com.example.addallstartinfo.AddAllStartInformationApplication;
 import com.example.response.ErrorResponseMessage;
@@ -39,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddAllFullInformationController {
+
 
     @FXML
     private Button addEquipment;
@@ -123,6 +125,8 @@ public class AddAllFullInformationController {
     TableColumn<ForInsertInTableViewFullInfo, Double> colFullPower;
     @FXML
     TableColumn<ForInsertInTableViewFullInfo, Double> colMaxCurrent;
+    @FXML
+    public CheckBox cbForChoosingInMainBusbar;
 
 
     public void menuItemFileExitAction(ActionEvent actionEvent) {
@@ -135,6 +139,7 @@ public class AddAllFullInformationController {
         stage.setTitle("Start Page");
         stage.setScene(new Scene(root));
     }
+
 
     public void openStartTable(ActionEvent actionEvent) throws IOException {
         AddAllStartInformationApplication addAllStartInformationApplication = new AddAllStartInformationApplication();
@@ -150,16 +155,46 @@ public class AddAllFullInformationController {
             refreshTable();
         } else if (actionEvent.getSource() == deleteEquipment) {
             deleteEquipment();
+        } else if (actionEvent.getSource() == cbForChoosingInMainBusbar) {
+            forChoosingInMainBusbar();
+        }
+    }
+
+
+    public void forChoosingInMainBusbar() {
+        if (cbForChoosingInMainBusbar.isSelected()) {
+            tfAmount1.setVisible(false);
+            tfAmount2.setVisible(false);
+            tfAmount3.setVisible(false);
+            tfAmount4.setVisible(false);
+            tfAmount5.setVisible(false);
+            tfAmount6.setVisible(false);
+            tfAmount7.setVisible(false);
+            tfAmount8.setVisible(false);
+        } else {
+            tfAmount1.setVisible(true);
+            tfAmount2.setVisible(true);
+            tfAmount3.setVisible(true);
+            tfAmount4.setVisible(true);
+            tfAmount5.setVisible(true);
+            tfAmount6.setVisible(true);
+            tfAmount7.setVisible(true);
+            tfAmount8.setVisible(true);
         }
     }
 
     public void createEquipment() throws IOException {
-
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = makeRequestAsString(objectMapper, "create");
+        String requestURI = "";
+        boolean selected = cbForChoosingInMainBusbar.isSelected();
+        if (selected){
+            requestURI = "create/main" ;
+        }else {
+            requestURI = "create" ;
+        }
+        String value = makeRequestAsString(objectMapper, requestURI);
 
-
-        HttpPost request = new HttpPost("http://localhost:9999//fullinformation/create");
+        HttpPost request = new HttpPost("http://localhost:9999//fullinformation/"+requestURI);
         request.addHeader("content-type", "application/json");
         request.setEntity(new StringEntity(value, StandardCharsets.UTF_8));
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -206,9 +241,16 @@ public class AddAllFullInformationController {
 
     public void updateEquipment() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = makeRequestAsString(objectMapper, "update");
+        String requestURI = "";
+        boolean selected = cbForChoosingInMainBusbar.isSelected();
+        if (selected){
+            requestURI = "update/main" ;
+        }else {
+            requestURI = "update" ;
+        }
+        String value = makeRequestAsString(objectMapper, requestURI);
 
-        HttpPost post = new HttpPost("http://localhost:9999//fullinformation/update");
+        HttpPost post = new HttpPost("http://localhost:9999//fullinformation/"+requestURI);
         post.addHeader("content-type", "application/json");
         post.setEntity(new StringEntity(value, StandardCharsets.UTF_8));
 
@@ -317,6 +359,26 @@ public class AddAllFullInformationController {
         try {
             if (requestType.equals("delete")) {
                 return tfId.getText();
+            } else if (requestType.equals("create/main") || requestType.equals("update/main")) {
+                ForRequestFullInformationMainBusbar forRequestFullInformationMainBusbar = new ForRequestFullInformationMainBusbar();
+
+                List<Long> list = new ArrayList<>();
+                forRequestFullInformationMainBusbar.setId(Long.valueOf(tfId.getText()));
+                forRequestFullInformationMainBusbar.setNameOfBusbar(tfName.getText().trim());
+
+                try {
+                    list.add(Long.valueOf(tfNumber1.getText()));
+                    list.add(Long.valueOf(tfNumber2.getText()));
+                    list.add(Long.valueOf(tfNumber3.getText()));
+                    list.add(Long.valueOf(tfNumber4.getText()));
+                    list.add(Long.valueOf(tfNumber5.getText()));
+                    list.add(Long.valueOf(tfNumber6.getText()));
+                    list.add(Long.valueOf(tfNumber7.getText()));
+                    list.add(Long.valueOf(tfNumber8.getText()));
+                } catch (Exception ignored) {
+                }
+                forRequestFullInformationMainBusbar.setNumbersBusbarsIncludedInMain(list);
+                return objectMapper.writeValueAsString(forRequestFullInformationMainBusbar);
             } else {
                 ForRequestFullInformation forRequestFullInformation = new ForRequestFullInformation();
 
@@ -333,7 +395,7 @@ public class AddAllFullInformationController {
                     list.add(new ListInputEquipment(id, Long.valueOf(tfNumber6.getText()), Integer.valueOf(tfAmount6.getText())));
                     list.add(new ListInputEquipment(id, Long.valueOf(tfNumber7.getText()), Integer.valueOf(tfAmount7.getText())));
                     list.add(new ListInputEquipment(id, Long.valueOf(tfNumber8.getText()), Integer.valueOf(tfAmount8.getText())));
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
                 forRequestFullInformation.setNumbersAndAmountOfEquipments(list);
                 return objectMapper.writeValueAsString(forRequestFullInformation);

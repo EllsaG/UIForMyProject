@@ -1,7 +1,7 @@
 package com.example.response;
 
 public class StartInformationResponse {
-    private Long startInformId;
+    private long startInformId;
     private String name;
     private double power;
     private int amount;
@@ -11,11 +11,11 @@ public class StartInformationResponse {
     private double avgDailyActivePower;
     private double avgDailyReactivePower;
 
-    public Long getStartInformId() {
+    public long getStartInformId() {
         return startInformId;
     }
 
-    public void setStartInformId(Long startInformId) {
+    public void setStartInformId(long startInformId) {
         this.startInformId = startInformId;
     }
 

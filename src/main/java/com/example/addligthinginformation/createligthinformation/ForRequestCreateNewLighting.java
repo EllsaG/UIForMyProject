@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ForRequestCreateNewLighting {
 
-    private Long lightingId;
+    private long lightingId;
     private String modelOfLuminaire;
     private String modelOfLamp;
     private int amountOfLampsInOneLuminaire;
@@ -24,11 +24,11 @@ public class ForRequestCreateNewLighting {
     public ForRequestCreateNewLighting() {
     }
 
-    public Long getLightingId() {
+    public long getLightingId() {
         return lightingId;
     }
 
-    public void setLightingId(Long lightingId) {
+    public void setLightingId(long lightingId) {
         this.lightingId = lightingId;
     }
 
