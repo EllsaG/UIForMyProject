@@ -1,19 +1,15 @@
 package com.example.response;
 
-import java.util.HashMap;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.HashMap;
+@Getter
+@Setter
+@EqualsAndHashCode
 public class LightChooseLuminaireResponse {
 
     HashMap<Integer, HashMap<Double,Double>> lightFluxAtAmountOfLamps;
 
-    public LightChooseLuminaireResponse() {
-    }
-
-    public HashMap<Integer, HashMap<Double, Double>> getLightFluxAtAmountOfLamps() {
-        return lightFluxAtAmountOfLamps;
-    }
-
-    public void setLightFluxAtAmountOfLamps(HashMap<Integer, HashMap<Double, Double>> lightFluxAtAmountOfLamps) {
-        this.lightFluxAtAmountOfLamps = lightFluxAtAmountOfLamps;
-    }
 }
