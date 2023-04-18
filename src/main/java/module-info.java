@@ -7,7 +7,7 @@ module com.example.uiformyproject {
     requires com.fasterxml.jackson.databind;
     requires org.apache.httpcomponents.httpclient;
     requires org.apache.httpcomponents.httpcore;
-    requires lombok;
+    requires static lombok;
 
 
     exports com.example.addallstartinfo.createstartinformation;
