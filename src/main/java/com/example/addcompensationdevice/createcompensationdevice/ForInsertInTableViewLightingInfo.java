@@ -1,4 +1,4 @@
-package com.example.addligthinginformation.createligthinformation;
+package com.example.addcompensationdevice.createcompensationdevice;
 
 import com.example.response.LightingCreateNewResponse;
 import lombok.Getter;

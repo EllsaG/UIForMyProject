@@ -26,7 +26,13 @@ module com.example.uiformyproject {
     opens com.example.addligthinginformation to javafx.fxml;
     exports com.example.addligthinginformation.createligthinformation;
     opens com.example.addligthinginformation.createligthinformation to javafx.fxml;
+    exports com.example.addcompensationdevice;
+    opens com.example.addcompensationdevice to javafx.fxml;
+    exports com.example.addcompensationdevice.createcompensationdevice;
+    opens com.example.addcompensationdevice.createcompensationdevice to javafx.fxml;
+
     exports com.example.utils;
     opens com.example.utils to javafx.fxml;
+
 
 }

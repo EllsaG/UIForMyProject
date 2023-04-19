@@ -11,7 +11,7 @@ import java.io.IOException;
 public class AddAllFullInformationApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AddAllStartInformationApplication.class.getResource("/create-full-information.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(AddAllFullInformationApplication.class.getResource("/create-full-information.fxml"));
         stage.setTitle("Full Information");
         stage.setScene( new Scene(fxmlLoader.load(), 1400, 620));
         stage.show();
