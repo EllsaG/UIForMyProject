@@ -1,12 +1,9 @@
 package com.example.addcompensationdevice;
 
 
-import com.example.addcompensationdevice.createcompensationdevice.ForInsertInTableViewForChooseLuminaires;
-import com.example.addcompensationdevice.createcompensationdevice.ForRequestChooseLuminaire;
-import com.example.addcompensationdevice.createcompensationdevice.ForRequestCreateNewLighting;
-import com.example.addligthinginformation.createligthinformation.ForInsertInTableViewLightingInfo;
+import com.example.addcompensationdevice.createcompensationdevice.*;
+import com.example.response.CompensationDeviceResponse;
 import com.example.response.ErrorResponseMessage;
-import com.example.response.LightChooseLuminaireResponse;
 import com.example.response.LightingCreateNewResponse;
 import com.example.utils.WrapTextTableCell;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -37,97 +34,52 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Set;
 
 public class AddCompensationDeviceController {
 
     @FXML
-    public TextField tfChooseLuminareId;
-    @FXML
-    public TextField tfModelOfLuminaire;
-    @FXML
-    public TextField tfModelOfLamp;
-    @FXML
-    public TextField tfAmountOfLampsInOneLuminaire;
-    @FXML
-    public TextField tfLightFluxOneLamp;
-    @FXML
-    public TextField tfActivePowerOneLamp;
-    @FXML
     public TextField tfId;
     @FXML
-    public Button addChooseLuminaire;
+    public TextField tfModelOfCompensationDevice;
     @FXML
-    public Button deleteLighting;
-    @FXML
-    public Button createNewLighting;
-    @FXML
-    public Button updateLighting;
-    public Button refreshTable;
+    public TextField tfReactivePowerOfCompensationDevice;
 
+    @FXML
+    private TableView<CompensationDeviceForResponse> tvChoosenCompensationDevice;
+    @FXML
+    public TableColumn<ForInsertInTableViewCompensationDevice, Long> colIdOfChoosen;
+    @FXML
+    public TableColumn<ForInsertInTableViewCompensationDevice, String> colCompensationDeviceModel;
+    @FXML
+    public TableColumn<ForInsertInTableViewCompensationDevice, Double> colCompensationDeviceReactivePower;
+    @FXML
+    public TableView<ChooseCompensationDeviceForResponse> tvForChooseCompensationDevice;
+    @FXML
+    public TableColumn<ForInsertInTableViewForChooseCompensationDevice, Long> colIdForChoose;
+    @FXML
+    public TableColumn<ForInsertInTableViewForChooseCompensationDevice, String> colParentBusbarForChoose;
+    @FXML
+    public TableColumn<ForInsertInTableViewForChooseCompensationDevice, Double> colMinForChoose;
+    @FXML
+    public TableColumn<ForInsertInTableViewForChooseCompensationDevice, Double> colMaxForChoose;
+
+    @FXML
+    private Button createCompensationDevice;
+    @FXML
+    private Button updateCompensationDevice;
+    @FXML
+    private Button deleteCompensationDevice;
+
+    @FXML
+    private Button refreshAllTables;
 
     @FXML
     private TextArea taMessage;
 
-    @FXML
-    private TextField tfHeightOfHall;
-
-    @FXML
-    private TextField tfLengthOfHall;
-
-    @FXML
-    private TextField tfWidthOfHall;
-
-
-    @FXML
-    private TableView<ForInsertInTableViewForChooseLuminaires> tvResponse;
-    @FXML
-    private TableColumn<ForInsertInTableViewForChooseLuminaires, Integer> colAmountLampsInLuminaire;
-    @FXML
-    private TableColumn<ForInsertInTableViewForChooseLuminaires, Double> colMin;
-    @FXML
-    private TableColumn<ForInsertInTableViewForChooseLuminaires, Double> colMax;
-    @FXML
-    TableView<LightingCreateNewResponse> tvLighting;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, Long> colID;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, String> colModelOfLuminaire;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, String> colModelOfLamp;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, Double> colPowerOfOneLamp;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, Double> colLightFluxOfOneLamp;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, Integer> colAmountOfLuminairesTotal;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, Integer> colAmountLuminairesPerLength;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, Integer> colAmountLuminairesPerWidth;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, Double> colDistanceBetweenRowsOfLamps;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, Double> colDistanceBetweenWallAndFirstRowOfLamps;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, Double> colActivePower;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, Double> colReactivePower;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, Double> colFullPower;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, Double> colElectricCurrentFull;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, Double> colElectricCurrentOfOneRow;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, Double> colCosf;
-    @FXML
-    public TableColumn<LightingCreateNewResponse, Double> colTgf;
-
 
     @FXML
     void backToStartPage(ActionEvent event) throws IOException {
-        Stage stage = (Stage) tfHeightOfHall.getScene().getWindow();
+        Stage stage = (Stage) tfId.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/start-page.fxml"));
         stage.setTitle("Start Page");
         stage.setScene(new Scene(root));
@@ -138,64 +90,56 @@ public class AddCompensationDeviceController {
         Platform.exit();
     }
 
-    public void lightingInformation(ActionEvent actionEvent) throws IOException {
-        if (actionEvent.getSource() == addChooseLuminaire) {
-            chooseLuminaire();
-        }else if (actionEvent.getSource() == createNewLighting) {
-            createNewLighting();
-        } else if (actionEvent.getSource() == updateLighting) {
-            updateLighting();
-        } else if (actionEvent.getSource() == refreshTable) {
-            refreshTable();
-        } else if (actionEvent.getSource() == deleteLighting) {
-            deleteLighting();
+    public void compensationDevice(ActionEvent actionEvent) throws IOException {
+        if (actionEvent.getSource() == createCompensationDevice) {
+            createNewCompensationDevice();
+        } else if (actionEvent.getSource() == updateCompensationDevice) {
+            updateCompensationDevice();
+        } else if (actionEvent.getSource() == refreshAllTables) {
+            refreshAllTables();
+        } else if (actionEvent.getSource() == deleteCompensationDevice) {
+            deleteCompensationDevice();
         }
     }
 
     @FXML
     void handleMouseAction(MouseEvent event) {
-        LightingCreateNewResponse selectedItem = tvLighting.getSelectionModel().getSelectedItem();
+        CompensationDeviceForResponse selectedItem = tvChoosenCompensationDevice.getSelectionModel().getSelectedItem();
         tfId.setText(String.valueOf(selectedItem.getId()));
-        tfModelOfLuminaire.setText(selectedItem.getModelOfLuminaire());
-        tfModelOfLamp.setText(selectedItem.getModelOfLamp());
-        tfAmountOfLampsInOneLuminaire.setText(String.valueOf(selectedItem.getAmountOfLampsInOneLuminaire()));
-        tfLightFluxOneLamp.setText(String.valueOf(selectedItem.getLightFluxOfOneLamp()));
-        tfActivePowerOneLamp.setText(String.valueOf(selectedItem.getPowerOfOneLamp()));
+        tfModelOfCompensationDevice.setText(selectedItem.getModelOfCompensationDevice());
+        tfReactivePowerOfCompensationDevice.setText(String.valueOf(selectedItem.getReactivePowerOfCompensationDevice()));
+
     }
 
-    public void chooseLuminaire() throws IOException {
+    public void refreshAllTables() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = makeRequestAsString(objectMapper, "create", "chooseLuminaire");
 
+        HttpGet get = new HttpGet("http://localhost:9999//compensationdevice/all");
+        get.addHeader("content-type", "application/json");
 
-        HttpPost request = new HttpPost("http://localhost:9999//lightinformation/create/forchooseluminaires");
-        request.addHeader("content-type", "application/json");
-        request.setEntity(new StringEntity(value, StandardCharsets.UTF_8));
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
-             CloseableHttpResponse response = httpClient.execute(request)) {
+             CloseableHttpResponse response = httpClient.execute(get)) {
             HttpEntity entity = response.getEntity();
             String responseEntity = EntityUtils.toString(entity);
+            showInfo(objectMapper, responseEntity);
+
             try {
                 ErrorResponseMessage errorResponseMessage = objectMapper.readValue(responseEntity, ErrorResponseMessage.class);
                 taMessage.setText(errorResponseMessage.getMessage());
-
             } catch (Exception e) {
-                showInfo(objectMapper, responseEntity, "chooseLuminaire");
-                taMessage.setText("Information about amount " +
-                        "\n and light flux of lamps " +
-                        "\n for choose luminaires");
+                taMessage.setText("Tables refreshed");
             }
         } catch (HttpHostConnectException e) {
-            taMessage.setText("Unable to connect \n" + request.getURI());
+            taMessage.setText("Unable to connect \n" + get.getURI());
         }
     }
 
-    public void createNewLighting() throws IOException {
+    public void createNewCompensationDevice() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = makeRequestAsString(objectMapper, "create", "createNewLighting");
+        String value = makeRequestAsString(objectMapper, "create");
 
 
-        HttpPost request = new HttpPost("http://localhost:9999//lightinformation/create/createnewlighting");
+        HttpPost request = new HttpPost("http://localhost:9999//compensationdevice/create");
         request.addHeader("content-type", "application/json");
         request.setEntity(new StringEntity(value, StandardCharsets.UTF_8));
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -207,8 +151,8 @@ public class AddCompensationDeviceController {
                 taMessage.setText(errorResponseMessage.getMessage());
 
             } catch (Exception e) {
-                showInfo(objectMapper, responseEntity, "createNewLighting");
-                taMessage.setText("Information about lighting " +
+                showInfo(objectMapper, responseEntity);
+                taMessage.setText("Information about compensation device " +
                         "\n with id № " + tfId.getText() +
                         "\nis saved");
             }
@@ -217,34 +161,12 @@ public class AddCompensationDeviceController {
         }
     }
 
-    public void refreshTable() throws IOException {
+
+    public void updateCompensationDevice() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
+        String value = makeRequestAsString(objectMapper, "create");
 
-        HttpGet get = new HttpGet("http://localhost:9999//lightinformation/all");
-        get.addHeader("content-type", "application/json");
-
-        try (CloseableHttpClient httpClient = HttpClients.createDefault();
-             CloseableHttpResponse response = httpClient.execute(get)) {
-            HttpEntity entity = response.getEntity();
-            String responseEntity = EntityUtils.toString(entity);
-            showInfo(objectMapper, responseEntity, "refreshTable");
-
-            try {
-                ErrorResponseMessage errorResponseMessage = objectMapper.readValue(responseEntity, ErrorResponseMessage.class);
-                taMessage.setText(errorResponseMessage.getMessage());
-            } catch (Exception e) {
-                taMessage.setText("Table refreshed");
-            }
-        } catch (HttpHostConnectException e) {
-            taMessage.setText("Unable to connect \n" + get.getURI());
-        }
-    }
-
-    public void updateLighting() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String value = makeRequestAsString(objectMapper, "create", "updateLighting");
-
-        HttpPost post = new HttpPost("http://localhost:9999//lightinformation/update/insertnewluminaries");
+        HttpPost post = new HttpPost("http://localhost:9999//compensationdevice/update");
         post.addHeader("content-type", "application/json");
         post.setEntity(new StringEntity(value, StandardCharsets.UTF_8));
 
@@ -257,8 +179,8 @@ public class AddCompensationDeviceController {
                 taMessage.setText(errorResponseMessage.getMessage());
 
             } catch (Exception e) {
-                showInfo(objectMapper, responseEntity, "updateLighting");
-                taMessage.setText("Information about lighting" +
+                showInfo(objectMapper, responseEntity);
+                taMessage.setText("Information about compensation device" +
                         "\n with id № " + tfId.getText() +
                         "\nhas been updated");
             }
@@ -267,11 +189,11 @@ public class AddCompensationDeviceController {
         }
     }
 
-    public void deleteLighting() throws IOException {
+    public void deleteCompensationDevice() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = makeRequestAsString(objectMapper, "delete", "deleteLighting");
+        String value = makeRequestAsString(objectMapper, "delete");
 
-        HttpDelete post = new HttpDelete("http://localhost:9999//lightinformatiion/delete/" + value);
+        HttpDelete post = new HttpDelete("http://localhost:9999//compensationdevice/delete/" + value);
         post.addHeader("content-type", "application/json");
 
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -283,10 +205,10 @@ public class AddCompensationDeviceController {
                 taMessage.setText(errorResponseMessage.getMessage());
 
             } catch (Exception e) {
-                showInfo(objectMapper, responseEntity, "deleteLighting");
-                taMessage.setText("Information about lighting" +
+                showInfo(objectMapper, responseEntity);
+                taMessage.setText("Information about compensation device" +
                         "\n with id № " + tfId.getText() +
-                        "\nhas been updated");
+                        "\nhas been delete");
             }
         } catch (HttpHostConnectException e) {
             taMessage.setText("Unable to connect \n" + post.getURI());
@@ -294,112 +216,67 @@ public class AddCompensationDeviceController {
     }
 
 
-    public String makeRequestAsString(ObjectMapper objectMapper, String requestType, String reasonForRequest) {
-        if (reasonForRequest.equals("chooseLuminaire")) {
-            try {
-                if (requestType.equals("delete")) {
-                    return tfHeightOfHall.getText();
-                } else {
-                    ForRequestChooseLuminaire forRequestChooseLuminaire = new ForRequestChooseLuminaire();
-                    forRequestChooseLuminaire.setLightingId(Long.valueOf(tfChooseLuminareId.getText()));
-                    forRequestChooseLuminaire.setHeightProductionHall(Double.valueOf(tfHeightOfHall.getText()));
-                    forRequestChooseLuminaire.setLengthProductionHall(Double.valueOf(tfLengthOfHall.getText()));
-                    forRequestChooseLuminaire.setWidthProductionHall(Double.valueOf(tfWidthOfHall.getText()));
+    public String makeRequestAsString(ObjectMapper objectMapper, String requestType) {
 
-                    return objectMapper.writeValueAsString(forRequestChooseLuminaire);
-                }
-            } catch (Exception e) {
-                taMessage.setText("Write values in all fields");
-                throw new RuntimeException("Write values in all fields");
+        try {
+            if (requestType.equals("delete")) {
+                return tfId.getText();
+            } else {
+                ForRequestCompensationDevice forRequestCompensationDevice = new ForRequestCompensationDevice();
+
+                forRequestCompensationDevice.setId(Long.valueOf(tfId.getText()));
+                forRequestCompensationDevice.setNameOfCompensationDevice(tfModelOfCompensationDevice.getText());
+                forRequestCompensationDevice.setPowerOfCompensatingDevice(Double.valueOf(tfReactivePowerOfCompensationDevice.getText()));
+
+                return objectMapper.writeValueAsString(forRequestCompensationDevice);
             }
-        } else {
-            try {
-                if (requestType.equals("delete")) {
-                    return tfId.getText();
-                } else {
-                    ForRequestCreateNewLighting forRequestCreateNewLighting = new ForRequestCreateNewLighting();
-
-                    forRequestCreateNewLighting.setLightingId(Long.valueOf(tfId.getText()));
-                    forRequestCreateNewLighting.setModelOfLuminaire(tfModelOfLuminaire.getText());
-                    forRequestCreateNewLighting.setModelOfLamp(tfModelOfLamp.getText());
-                    forRequestCreateNewLighting.setAmountOfLampsInOneLuminaire(Integer.valueOf(tfAmountOfLampsInOneLuminaire.getText()));
-                    forRequestCreateNewLighting.setLightFluxOneLamp(Double.valueOf(tfLightFluxOneLamp.getText()));
-                    forRequestCreateNewLighting.setActivePowerOneLamp(Double.valueOf(tfActivePowerOneLamp.getText()));
-
-                    return objectMapper.writeValueAsString(forRequestCreateNewLighting);
-                }
-            } catch (Exception e) {
-                taMessage.setText("Write values in all fields");
-                throw new RuntimeException("Write values in all fields");
-            }
+        } catch (Exception e) {
+            taMessage.setText("Write values in all fields");
+            throw new RuntimeException("Write values in all fields");
         }
+
     }
 
-    public void showInfo(ObjectMapper objectMapper, String responseEntity, String reasonForRequest) throws JsonProcessingException {
-        if (reasonForRequest.equals("chooseLuminaire")) {
-            ObservableList<ForInsertInTableViewForChooseLuminaires> list = getChooseLuminaireList(objectMapper, responseEntity);
+    public void showInfo(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
 
-            colAmountLampsInLuminaire.setCellValueFactory(new PropertyValueFactory<>("amountLamps"));
-            colMin.setCellValueFactory(new PropertyValueFactory<>("minLightFluxForChooseLuminaire"));
-            colMax.setCellValueFactory(new PropertyValueFactory<>("maxLightFluxForChooseLuminaire"));
+        ObservableList<CompensationDeviceForResponse> chooseCompensationDeviceList = getCompensationDeviceList(objectMapper, responseEntity);
 
-            tvResponse.setItems(list);
-        } else {
-            ObservableList<LightingCreateNewResponse> list = getCreateNewLightingInfo(objectMapper, responseEntity);
-            colID.setCellValueFactory(new PropertyValueFactory<>("id"));
-            colModelOfLuminaire.setCellValueFactory(new PropertyValueFactory<>("modelOfLuminaire"));
-            colModelOfLamp.setCellValueFactory(new PropertyValueFactory<>("modelOfLamp"));
-            colPowerOfOneLamp.setCellValueFactory(new PropertyValueFactory<>("powerOfOneLamp"));
-            colLightFluxOfOneLamp.setCellValueFactory(new PropertyValueFactory<>("lightFluxOfOneLamp"));
-            colAmountOfLuminairesTotal.setCellValueFactory(new PropertyValueFactory<>("amountOfLuminaires"));
-            colAmountLuminairesPerLength.setCellValueFactory(new PropertyValueFactory<>("amountLuminairesPerLength"));
-            colAmountLuminairesPerWidth.setCellValueFactory(new PropertyValueFactory<>("amountLuminairesPerWidth"));
-            colDistanceBetweenRowsOfLamps.setCellValueFactory(new PropertyValueFactory<>("distanceBetweenRowsOfLamps"));
-            colDistanceBetweenWallAndFirstRowOfLamps.setCellValueFactory(new PropertyValueFactory<>("distanceBetweenWallAndFirstRowOfLamps"));
-            colActivePower.setCellValueFactory(new PropertyValueFactory<>("activePower"));
-            colReactivePower.setCellValueFactory(new PropertyValueFactory<>("reactivePower"));
-            colFullPower.setCellValueFactory(new PropertyValueFactory<>("fullPower"));
-            colElectricCurrentFull.setCellValueFactory(new PropertyValueFactory<>("electricCurrent"));
-            colElectricCurrentOfOneRow.setCellValueFactory(new PropertyValueFactory<>("electricCurrentOfOneRowOfLuminaire"));
-            colCosf.setCellValueFactory(new PropertyValueFactory<>("cosF"));
-            colTgf.setCellValueFactory(new PropertyValueFactory<>("tgF"));
+        colIdOfChoosen.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colCompensationDeviceModel.setCellValueFactory(new PropertyValueFactory<>("modelOfCompensationDevice"));
+        colCompensationDeviceReactivePower.setCellValueFactory(new PropertyValueFactory<>("reactivePowerOfCompensationDevice"));
 
-            colModelOfLamp.setCellFactory((param) -> new WrapTextTableCell());
-            colModelOfLuminaire.setCellFactory((param) -> new WrapTextTableCell());
+        tvChoosenCompensationDevice.setItems(chooseCompensationDeviceList);
 
+        ObservableList<ChooseCompensationDeviceForResponse> compensationDeviceForChooseList = getCompensationDeviceForChooseList(objectMapper, responseEntity);
+        colIdForChoose.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colParentBusbarForChoose.setCellValueFactory(new PropertyValueFactory<>(""));
+        colMinForChoose.setCellValueFactory(new PropertyValueFactory<>("minPowerOfCompensatingDevice"));
+        colMaxForChoose.setCellValueFactory(new PropertyValueFactory<>("maxPowerOfCompensatingDevice"));
 
+        colParentBusbarForChoose.setCellFactory((param) -> new WrapTextTableCell());
 
-            tvLighting.setItems(list);
-        }
+        tvForChooseCompensationDevice.setItems(compensationDeviceForChooseList);
+
     }
 
-    public ObservableList<ForInsertInTableViewForChooseLuminaires> getChooseLuminaireList(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
+    public ObservableList<CompensationDeviceForResponse> getCompensationDeviceList(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
 
-        ObservableList<ForInsertInTableViewForChooseLuminaires> observableList = FXCollections.observableArrayList();
-        LightChooseLuminaireResponse lightChooseLuminaireResponse = objectMapper.readValue(responseEntity, LightChooseLuminaireResponse.class);
+        ObservableList<CompensationDeviceForResponse> observableList = FXCollections.observableArrayList();
+        CompensationDeviceResponse compensationDeviceResponse = objectMapper.readValue(responseEntity, CompensationDeviceResponse.class);
+        List<CompensationDeviceForResponse> compensationDeviceList = compensationDeviceResponse.getCompensationDeviceList();
+        observableList.addAll(compensationDeviceList);
 
-        for (int i = 1; i <= lightChooseLuminaireResponse.getLightFluxAtAmountOfLamps().size(); i++) {
-            ForInsertInTableViewForChooseLuminaires forInsertInTableViewLightingInfo = new ForInsertInTableViewForChooseLuminaires();
-            Set<Double> keys = lightChooseLuminaireResponse.getLightFluxAtAmountOfLamps().get(i).keySet();
-            forInsertInTableViewLightingInfo.setAmountLamps(i);
-            double key = keys.iterator().next();
-            forInsertInTableViewLightingInfo.setMinLightFluxForChooseLuminaire(key);
-            forInsertInTableViewLightingInfo.setMaxLightFluxForChooseLuminaire(lightChooseLuminaireResponse.getLightFluxAtAmountOfLamps().get(i).get(key));
-            observableList.add(forInsertInTableViewLightingInfo);
-        }
         return observableList;
     }
 
-    public ObservableList<LightingCreateNewResponse> getCreateNewLightingInfo(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
-        ObservableList<LightingCreateNewResponse> observableList = FXCollections.observableArrayList();
-        ForInsertInTableViewLightingInfo forInsertInTableViewLightingInfo = objectMapper.readValue(responseEntity, ForInsertInTableViewLightingInfo.class);
-
-        for (int i = 0; i < forInsertInTableViewLightingInfo.getList().size(); i++) {
-            List<LightingCreateNewResponse> list = forInsertInTableViewLightingInfo.getList();
-            observableList.add(list.get(i));
-        }
+    public ObservableList<ChooseCompensationDeviceForResponse> getCompensationDeviceForChooseList(ObjectMapper objectMapper, String responseEntity) throws JsonProcessingException {
+        ObservableList<ChooseCompensationDeviceForResponse> observableList = FXCollections.observableArrayList();
+        CompensationDeviceResponse compensationDeviceResponse = objectMapper.readValue(responseEntity, CompensationDeviceResponse.class);
+        List<ChooseCompensationDeviceForResponse> forChooseCompensationDeviceList = compensationDeviceResponse.getForChooseCompensationDeviceList();
+        observableList.addAll(forChooseCompensationDeviceList);
         return observableList;
     }
+
 
 }
 

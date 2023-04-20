@@ -1,6 +1,5 @@
 package com.example.addcompensationdevice.createcompensationdevice;
 
-import com.example.response.LightingCreateNewResponse;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,8 +7,8 @@ import java.util.List;
 
 @Getter
 @Setter
-public class ForInsertInTableViewLightingInfo {
+public class ForInsertInTableViewForChooseCompensationDevice {
 
-    List<LightingCreateNewResponse> list;
+    List<ChooseCompensationDeviceForResponse> list;
 
 }

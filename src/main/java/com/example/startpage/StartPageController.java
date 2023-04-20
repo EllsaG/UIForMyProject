@@ -15,6 +15,10 @@ import java.io.IOException;
 
 public class StartPageController {
     @FXML
+    public Button compensationDevice;
+    @FXML
+    public Button lighting;
+    @FXML
     private Button addEquipment;
     @FXML
     private Button calculation;
@@ -48,4 +52,12 @@ public class StartPageController {
         stage.setTitle("Lighting Information");
         stage.setScene(new Scene(root));
     }
+
+    public void compensationDevice(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) calculation.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/create-compensation-device.fxml"));
+        stage.setTitle("Compensation Device");
+        stage.setScene(new Scene(root));
+    }
+
 }
