@@ -10,6 +10,6 @@ import java.util.List;
 @Setter
 public class ForInsertInTableViewLightingInfo {
 
-    List<LightingCreateNewResponse> list;
+    List<LightingCreateNewResponse> lightInformationList;
 
 }

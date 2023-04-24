@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane minHeight="440.0" minWidth="530.0" stylesheets="styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.addligthinginformation.chooseluminaire.ChooseLuminaireController">
+
+
+    <MenuBar style="-fx-background-color: #E0E0E0;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+             AnchorPane.topAnchor="0.0">
+        <Menu text="Back">
+            <MenuItem onAction="#backToPreviousPage" text="Back"/>
+        </Menu>
+        <Menu text="File">
+            <MenuItem onAction="#menuItemFileExitAction" text="Exit"/>
+        </Menu>
+
+    </MenuBar>
+
+    <HBox AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="50.0">
+        <VBox layoutX="59.0" layoutY="91.0" prefHeight="70.0" prefWidth="76.0" spacing="15.0"
+              AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="70.0" >
+            <Text text="ID">
+                <font>
+                    <Font size="16.0"/>
+                </font>
+            </Text>
+            <Text text="Height of hall">
+                <font>
+                    <Font size="16.0"/>
+                </font>
+            </Text>
+            <Text text="Width of hall">
+                <font>
+                    <Font size="16.0"/>
+                </font>
+            </Text>
+            <Text layoutX="10.0" layoutY="64.0" text="Length of hall">
+                <font>
+                    <Font size="16.0"/>
+                </font>
+            </Text>
+
+
+        </VBox>
+        <VBox layoutX="135.0" layoutY="91.0" prefHeight="70.0" prefWidth="90.0" spacing="11.0"
+              AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="70.0">
+            <children>
+                <TextField fx:id="tfChooseLuminareId"/>
+                <TextField fx:id="tfHeightOfHall"/>
+                <TextField fx:id="tfWidthOfHall"/>
+                <TextField fx:id="tfLengthOfHall"/>
+            </children>
+            <HBox.margin>
+                <Insets left="10.0"/>
+            </HBox.margin>
+        </VBox>
+
+    </HBox>
+
+
+    <TableView fx:id="tvHallResponse" layoutX="312.0" layoutY="91.0" onMouseClicked="#handleMouseAction" prefHeight="200.0"
+               prefWidth="270.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="240.0"
+               AnchorPane.topAnchor="40.0">
+
+        <columns>
+            <TableColumn fx:id="colIdForChoose" prefWidth="30" text="ID"/>
+        </columns>
+        <columns>
+            <TableColumn fx:id="colAmountLampsInLuminaire" prefWidth="100" text="amount lamps &#10;in one luminaire"/>
+        </columns>
+        <columns>
+            <TableColumn fx:id="colFlux" prefWidth="140.0" text="admissible light flux">
+                <columns>
+                    <TableColumn fx:id="colMin" prefWidth="70.0" text="min"/>
+                    <TableColumn fx:id="colMax" prefWidth="70.0" text="max"/>
+                </columns>
+            </TableColumn>
+        </columns>
+        <VBox.margin>
+            <Insets top="10.0"/>
+        </VBox.margin>
+
+    </TableView>
+
+
+    <VBox layoutX="13.0" layoutY="362.0" prefHeight="110.0" prefWidth="200.0" spacing="10.0"
+          AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="200.0">
+        <HBox spacing="10.0">
+            <Button fx:id="updateLuminaire" layoutX="123.0" layoutY="343.0" mnemonicParsing="false"
+                    onAction="#chooseLuminare" prefHeight="25.0" prefWidth="85.0" text="UPDATE"
+                    AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="340.0">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@pictures/icons8_update_32px.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="createLuminaire" layoutX="40.0" layoutY="343.0" mnemonicParsing="false"
+                    onAction="#chooseLuminare" prefHeight="25.0" prefWidth="85.0" text="CREATE"
+                    AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="340.0">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@pictures/icons8_add_32px.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <padding>
+                <Insets left="10.0"/>
+            </padding>
+        </HBox>
+        <HBox layoutX="10.0" layoutY="10.0" spacing="10.0">
+            <padding>
+                <Insets left="10.0"/>
+            </padding>
+            <VBox.margin>
+                <Insets/>
+            </VBox.margin>
+
+
+            <Button fx:id="deleteLuminaire" mnemonicParsing="false" onAction="#chooseLuminare"
+                    prefHeight="25.0" prefWidth="85.0" text="DELETE">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@pictures/icons8_cancel_32px.png"/>
+                    </ImageView>
+                </graphic>
+                <HBox.margin>
+                    <Insets left="45.0"/>
+                </HBox.margin>
+            </Button>
+        </HBox>
+        <Button fx:id="refreshTable" layoutX="105.0" layoutY="381.0" mnemonicParsing="false"
+                onAction="#chooseLuminare" text="REFRESH TABLE" AnchorPane.leftAnchor="50.0"
+                AnchorPane.topAnchor="420.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@pictures/icons8_refresh_32px_2.png"/>
+                </ImageView>
+            </graphic>
+            <VBox.margin>
+                <Insets left="35.0"/>
+            </VBox.margin>
+        </Button>
+    </VBox>
+
+    <TextArea fx:id="taMessage" blendMode="DARKEN" disable="true" layoutX="69.0" layoutY="415.0" prefHeight="100.0"
+              prefWidth="200.0" text="INFORMATION AREA" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+              AnchorPane.topAnchor="320.0"/>
+
+</AnchorPane>

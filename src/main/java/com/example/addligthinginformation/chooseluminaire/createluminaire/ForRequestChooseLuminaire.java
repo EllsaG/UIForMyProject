@@ -1,4 +1,4 @@
-package com.example.addligthinginformation.createligthinformation;
+package com.example.addligthinginformation.chooseluminaire.createluminaire;
 
 
 import lombok.AllArgsConstructor;
