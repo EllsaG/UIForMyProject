@@ -140,7 +140,7 @@ public class AddLightingInformationController {
 
     public void createNewLighting() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = makeRequestAsString(objectMapper, "create", "createNewLighting");
+        String value = makeRequestAsString(objectMapper, "create");
 
 
         HttpPost request = new HttpPost("http://localhost:9999//lightinformation/create/createnewlighting");
@@ -190,7 +190,7 @@ public class AddLightingInformationController {
 
     public void updateLighting() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = makeRequestAsString(objectMapper, "create", "updateLighting");
+        String value = makeRequestAsString(objectMapper, "create");
 
         HttpPost post = new HttpPost("http://localhost:9999//lightinformation/update/insertnewluminaries");
         post.addHeader("content-type", "application/json");
@@ -217,7 +217,7 @@ public class AddLightingInformationController {
 
     public void deleteLighting() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = makeRequestAsString(objectMapper, "delete", "deleteLighting");
+        String value = makeRequestAsString(objectMapper, "delete");
 
         HttpDelete post = new HttpDelete("http://localhost:9999//lightinformatiion/delete/" + value);
         post.addHeader("content-type", "application/json");
@@ -242,7 +242,7 @@ public class AddLightingInformationController {
     }
 
 
-    public String makeRequestAsString(ObjectMapper objectMapper, String requestType, String reasonForRequest) {
+    public String makeRequestAsString(ObjectMapper objectMapper, String requestType) {
 
         try {
             if (requestType.equals("delete")) {
@@ -250,12 +250,12 @@ public class AddLightingInformationController {
             } else {
                 ForRequestCreateNewLighting forRequestCreateNewLighting = new ForRequestCreateNewLighting();
 
-                forRequestCreateNewLighting.setLightingId(Long.valueOf(tfId.getText()));
+                forRequestCreateNewLighting.setLightingId(Long.parseLong(tfId.getText()));
                 forRequestCreateNewLighting.setModelOfLuminaire(tfModelOfLuminaire.getText());
                 forRequestCreateNewLighting.setModelOfLamp(tfModelOfLamp.getText());
-                forRequestCreateNewLighting.setAmountOfLampsInOneLuminaire(Integer.valueOf(tfAmountOfLampsInOneLuminaire.getText()));
-                forRequestCreateNewLighting.setLightFluxOneLamp(Double.valueOf(tfLightFluxOneLamp.getText()));
-                forRequestCreateNewLighting.setActivePowerOneLamp(Double.valueOf(tfActivePowerOneLamp.getText()));
+                forRequestCreateNewLighting.setAmountOfLampsInOneLuminaire(Integer.parseInt(tfAmountOfLampsInOneLuminaire.getText()));
+                forRequestCreateNewLighting.setLightFluxOneLamp(Double.parseDouble(tfLightFluxOneLamp.getText()));
+                forRequestCreateNewLighting.setActivePowerOneLamp(Double.parseDouble(tfActivePowerOneLamp.getText()));
 
                 return objectMapper.writeValueAsString(forRequestCreateNewLighting);
             }

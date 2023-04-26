@@ -323,7 +323,7 @@ public class AddAllFullInformationController {
             tfAmount6.setText(String.valueOf(fullStartInformId.get(5).getAmount()));
             tfAmount7.setText(String.valueOf(fullStartInformId.get(6).getAmount()));
             tfAmount8.setText(String.valueOf(fullStartInformId.get(7).getAmount()));
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -363,7 +363,7 @@ public class AddAllFullInformationController {
                 ForRequestFullInformationMainBusbar forRequestFullInformationMainBusbar = new ForRequestFullInformationMainBusbar();
 
                 List<Long> list = new ArrayList<>();
-                forRequestFullInformationMainBusbar.setId(Long.valueOf(tfId.getText()));
+                forRequestFullInformationMainBusbar.setId(Long.parseLong(tfId.getText()));
                 forRequestFullInformationMainBusbar.setNameOfBusbar(tfName.getText().trim());
 
                 try {
@@ -383,18 +383,18 @@ public class AddAllFullInformationController {
                 ForRequestFullInformation forRequestFullInformation = new ForRequestFullInformation();
 
                 List<ListInputEquipment> list = new ArrayList<>();
-                forRequestFullInformation.setId(Long.valueOf(tfId.getText()));
+                forRequestFullInformation.setId(Long.parseLong(tfId.getText()));
                 forRequestFullInformation.setNameOfBusbar(tfName.getText().trim());
                 Long id = Long.valueOf(tfId.getText());
                 try {
-                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber1.getText()), Integer.valueOf(tfAmount1.getText())));
-                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber2.getText()), Integer.valueOf(tfAmount2.getText())));
-                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber3.getText()), Integer.valueOf(tfAmount3.getText())));
-                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber4.getText()), Integer.valueOf(tfAmount4.getText())));
-                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber5.getText()), Integer.valueOf(tfAmount5.getText())));
-                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber6.getText()), Integer.valueOf(tfAmount6.getText())));
-                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber7.getText()), Integer.valueOf(tfAmount7.getText())));
-                    list.add(new ListInputEquipment(id, Long.valueOf(tfNumber8.getText()), Integer.valueOf(tfAmount8.getText())));
+                    list.add(new ListInputEquipment(id, Long.parseLong(tfNumber1.getText()), Integer.parseInt(tfAmount1.getText())));
+                    list.add(new ListInputEquipment(id, Long.parseLong(tfNumber2.getText()), Integer.parseInt(tfAmount2.getText())));
+                    list.add(new ListInputEquipment(id, Long.parseLong(tfNumber3.getText()), Integer.parseInt(tfAmount3.getText())));
+                    list.add(new ListInputEquipment(id, Long.parseLong(tfNumber4.getText()), Integer.parseInt(tfAmount4.getText())));
+                    list.add(new ListInputEquipment(id, Long.parseLong(tfNumber5.getText()), Integer.parseInt(tfAmount5.getText())));
+                    list.add(new ListInputEquipment(id, Long.parseLong(tfNumber6.getText()), Integer.parseInt(tfAmount6.getText())));
+                    list.add(new ListInputEquipment(id, Long.parseLong(tfNumber7.getText()), Integer.parseInt(tfAmount7.getText())));
+                    list.add(new ListInputEquipment(id, Long.parseLong(tfNumber8.getText()), Integer.parseInt(tfAmount8.getText())));
                 } catch (Exception ignored) {
                 }
                 forRequestFullInformation.setNumbersAndAmountOfEquipments(list);

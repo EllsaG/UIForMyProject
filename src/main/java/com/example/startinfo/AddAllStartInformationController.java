@@ -228,13 +228,13 @@ public class AddAllStartInformationController {
             } else {
                 ForRequestStartInformation forRequestStartInformation = new ForRequestStartInformation();
 
-                forRequestStartInformation.setStartInformId(Long.valueOf(tfId.getText()));
+                forRequestStartInformation.setStartInformId(Long.parseLong(tfId.getText()));
                 forRequestStartInformation.setName(tfName.getText().trim());
-                forRequestStartInformation.setPower(Double.valueOf(tfPower.getText()));
-                forRequestStartInformation.setAmount(Integer.valueOf(tfAmount.getText()));
-                forRequestStartInformation.setKi(Double.valueOf(tfKi.getText()));
-                forRequestStartInformation.setCosf(Double.valueOf(tfCosf.getText()));
-                forRequestStartInformation.setTgf(Double.valueOf(tfTgf.getText()));
+                forRequestStartInformation.setPower(Double.parseDouble(tfPower.getText()));
+                forRequestStartInformation.setAmount(Integer.parseInt(tfAmount.getText()));
+                forRequestStartInformation.setKi(Double.parseDouble(tfKi.getText()));
+                forRequestStartInformation.setCosf(Double.parseDouble(tfCosf.getText()));
+                forRequestStartInformation.setTgf(Double.parseDouble(tfTgf.getText()));
 
                 return objectMapper.writeValueAsString(forRequestStartInformation);
             }

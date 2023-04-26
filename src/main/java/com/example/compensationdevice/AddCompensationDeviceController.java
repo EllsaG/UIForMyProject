@@ -223,9 +223,9 @@ public class AddCompensationDeviceController {
             } else {
                 ForRequestCompensationDevice forRequestCompensationDevice = new ForRequestCompensationDevice();
 
-                forRequestCompensationDevice.setId(Long.valueOf(tfId.getText()));
+                forRequestCompensationDevice.setId(Long.parseLong(tfId.getText()));
                 forRequestCompensationDevice.setNameOfCompensationDevice(tfModelOfCompensationDevice.getText());
-                forRequestCompensationDevice.setPowerOfCompensatingDevice(Double.valueOf(tfReactivePowerOfCompensationDevice.getText()));
+                forRequestCompensationDevice.setPowerOfCompensatingDevice(Double.parseDouble(tfReactivePowerOfCompensationDevice.getText()));
 
                 return objectMapper.writeValueAsString(forRequestCompensationDevice);
             }
