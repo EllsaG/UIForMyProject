@@ -8,7 +8,7 @@
 
 <AnchorPane minHeight="620" minWidth="1280" stylesheets="styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.addligthinginformation.AddLightingInformationController">
+            fx:controller="com.example.ligthinginformation.AddLightingInformationController">
 
 
     <MenuBar style="-fx-background-color: #E0E0E0;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"

@@ -10,36 +10,34 @@ module com.example.uiformyproject {
     requires static lombok;
 
 
-    exports com.example.addallstartinfo.createstartinformation;
-    opens com.example.addallstartinfo.createstartinformation to javafx.fxml;
+    exports com.example.startinfo.createstartinformation;
+    opens com.example.startinfo.createstartinformation to javafx.fxml;
     exports com.example.startpage;
     opens com.example.startpage to javafx.fxml;
     exports com.example.response;
     opens com.example.response to javafx.fxml;
-    exports com.example.addallstartinfo;
-    opens com.example.addallstartinfo to javafx.fxml;
-    exports com.example.addallfullinformation;
-    opens com.example.addallfullinformation to javafx.fxml;
-    exports com.example.addallfullinformation.createfullinformation;
-    opens com.example.addallfullinformation.createfullinformation to javafx.fxml;
-
-
-    exports com.example.addligthinginformation;
-    opens com.example.addligthinginformation to javafx.fxml;
-    exports com.example.addligthinginformation.createligthinformation;
-    opens com.example.addligthinginformation.createligthinformation to javafx.fxml;
-    exports com.example.addligthinginformation.chooseluminaire;
-    opens com.example.addligthinginformation.chooseluminaire to javafx.fxml;
-    exports com.example.addligthinginformation.chooseluminaire.createluminaire;
-    opens com.example.addligthinginformation.chooseluminaire.createluminaire to javafx.fxml;
-
-
-
-
-    exports com.example.addcompensationdevice;
-    opens com.example.addcompensationdevice to javafx.fxml;
-    exports com.example.addcompensationdevice.createcompensationdevice;
-    opens com.example.addcompensationdevice.createcompensationdevice to javafx.fxml;
+    exports com.example.startinfo;
+    opens com.example.startinfo to javafx.fxml;
+    exports com.example.fullinformation;
+    opens com.example.fullinformation to javafx.fxml;
+    exports com.example.fullinformation.createfullinformation;
+    opens com.example.fullinformation.createfullinformation to javafx.fxml;
+    exports com.example.ligthinginformation;
+    opens com.example.ligthinginformation to javafx.fxml;
+    exports com.example.ligthinginformation.createligthinformation;
+    opens com.example.ligthinginformation.createligthinformation to javafx.fxml;
+    exports com.example.ligthinginformation.chooseluminaire;
+    opens com.example.ligthinginformation.chooseluminaire to javafx.fxml;
+    exports com.example.ligthinginformation.chooseluminaire.createluminaire;
+    opens com.example.ligthinginformation.chooseluminaire.createluminaire to javafx.fxml;
+    exports com.example.compensationdevice;
+    opens com.example.compensationdevice to javafx.fxml;
+    exports com.example.compensationdevice.createcompensationdevice;
+    opens com.example.compensationdevice.createcompensationdevice to javafx.fxml;
+    exports com.example.powertransformer;
+    opens com.example.powertransformer to javafx.fxml;
+    exports com.example.powertransformer.createpowertransformer;
+    opens com.example.powertransformer.createpowertransformer to javafx.fxml;
 
     exports com.example.utils;
     opens com.example.utils to javafx.fxml;

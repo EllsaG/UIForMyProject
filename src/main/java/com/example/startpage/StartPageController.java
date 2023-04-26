@@ -1,6 +1,6 @@
 package com.example.startpage;
 
-import com.example.addallstartinfo.AddAllStartInformationApplication;
+import com.example.powertransformer.PowerTransformerApplication;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +18,8 @@ public class StartPageController {
     public Button compensationDevice;
     @FXML
     public Button lighting;
+    @FXML
+    public Button powerTransformer;
     @FXML
     private Button addEquipment;
     @FXML
@@ -59,5 +61,14 @@ public class StartPageController {
         stage.setTitle("Compensation Device");
         stage.setScene(new Scene(root));
     }
+
+    public void powerTransformer(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) calculation.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/create-power-transformer.fxml"));
+        stage.setTitle("Power Transformer");
+        stage.setScene(new Scene(root));
+    }
+
+
 
 }

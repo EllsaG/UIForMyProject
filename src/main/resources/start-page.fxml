@@ -17,6 +17,8 @@
         <Button fx:id="calculation" alignment="CENTER" onAction="#calculation" text="CALCULATE LOAD" />
         <Button fx:id="lighting" alignment="CENTER" onAction="#lighting" text="CALCULATE LIGHTING" />
         <Button fx:id="compensationDevice" alignment="CENTER" onAction="#compensationDevice" text="CHOOSE COMPENSATION DEVICE" />
+        <Button fx:id="powerTransformer" alignment="CENTER" onAction="#powerTransformer" text="CHOOSE POWER TRANSFORMER" />
+
     </VBox>
 
 </AnchorPane>

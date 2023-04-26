@@ -1,7 +1,7 @@
 package com.example.response;
 
-import com.example.addcompensationdevice.createcompensationdevice.ChooseCompensationDeviceForResponse;
-import com.example.addcompensationdevice.createcompensationdevice.CompensationDeviceForResponse;
+import com.example.compensationdevice.createcompensationdevice.ChooseCompensationDeviceForResponse;
+import com.example.compensationdevice.createcompensationdevice.CompensationDeviceForResponse;
 import lombok.Getter;
 import lombok.Setter;
 
