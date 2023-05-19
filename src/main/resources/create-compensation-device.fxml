@@ -95,19 +95,19 @@
     </HBox>
 
 
-    <VBox layoutX="13.0" layoutY="362.0" prefHeight="110.0" prefWidth="200.0" spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="420.0">
+    <VBox layoutX="13.0" layoutY="362.0" prefHeight="110.0" prefWidth="200.0" spacing="10.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="400.0">
         <HBox spacing="10.0">
             <Button fx:id="updateCompensationDevice" layoutX="123.0" layoutY="343.0" mnemonicParsing="false" onAction="#compensationDevice" prefHeight="25.0" prefWidth="85.0" text="UPDATE" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="340.0">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@pictures/icons8_update_32px.png"/>
+                        <Image url="@pictures/icons8_update_32px.png" />
                     </ImageView>
                 </graphic>
             </Button>
             <Button fx:id="createCompensationDevice" layoutX="40.0" layoutY="343.0" mnemonicParsing="false" onAction="#compensationDevice" prefHeight="25.0" prefWidth="85.0" text="CREATE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="340.0">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@pictures/icons8_add_32px.png"/>
+                        <Image url="@pictures/icons8_add_32px.png" />
                     </ImageView>
                 </graphic>
             </Button>
@@ -117,29 +117,28 @@
         </HBox>
         <HBox layoutX="10.0" layoutY="10.0" spacing="10.0">
             <padding>
-                <Insets left="10.0"/>
+                <Insets left="10.0" />
             </padding>
             <VBox.margin>
-                <Insets/>
+                <Insets />
             </VBox.margin>
 
 
-            <Button fx:id="deleteCompensationDevice" mnemonicParsing="false" onAction="#compensationDevice" prefHeight="25.0"
-                    prefWidth="85.0" text="DELETE">
+            <Button fx:id="deleteCompensationDevice" mnemonicParsing="false" onAction="#compensationDevice" prefHeight="25.0" prefWidth="85.0" text="DELETE">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@pictures/icons8_cancel_32px.png"/>
+                        <Image url="@pictures/icons8_cancel_32px.png" />
                     </ImageView>
                 </graphic>
                 <HBox.margin>
-                    <Insets left="45.0"/>
+                    <Insets left="45.0" />
                 </HBox.margin>
             </Button>
         </HBox>
         <Button fx:id="refreshAllTables" layoutX="105.0" layoutY="381.0" mnemonicParsing="false" onAction="#compensationDevice" text="REFRESH ALL TABLES" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="420.0">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@pictures/icons8_refresh_32px_2.png"/>
+                    <Image url="@pictures/icons8_refresh_32px_2.png" />
                 </ImageView>
             </graphic>
             <VBox.margin>
@@ -148,6 +147,6 @@
         </Button>
     </VBox>
 
-    <TextArea fx:id="taMessage" blendMode="DARKEN" disable="true" layoutX="69.0" layoutY="415.0" prefHeight="200.0" prefWidth="180.0" text="INFORMATION AREA" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="530.0" />
+    <TextArea fx:id="taMessage" blendMode="DARKEN" disable="true" layoutX="69.0" layoutY="415.0" prefHeight="200.0" prefWidth="300.0" text="INFORMATION AREA" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="530.0" />
 
 </AnchorPane>
