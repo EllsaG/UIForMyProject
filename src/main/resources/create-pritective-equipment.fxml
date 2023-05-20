@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane minHeight="620" minWidth="1280" stylesheets="styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.powertransformer.PowerTransformerController">
+
+
+    <MenuBar style="-fx-background-color: #E0E0E0;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+             AnchorPane.topAnchor="0.0">
+        <Menu text="Back">
+            <MenuItem onAction="#backToStartPage" text="Back"/>
+        </Menu>
+        <Menu text="File">
+            <MenuItem onAction="#menuItemFileExitAction" text="Exit"/>
+        </Menu>
+
+    </MenuBar>
+
+    <HBox prefWidth="320.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
+        <VBox layoutX="59.0" layoutY="91.0" prefHeight="70.0" prefWidth="76.0" spacing="6.0"
+              AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="70.0">
+            <Text text="ID">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Text>
+            <Text text="  ">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Text>
+            <Text text="">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Text>
+            <Text text="">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Text>
+            <Text text="Idle losses &#10;of the Transformer">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Text>
+            <Text text="High side &#10;voltage">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Text>
+            <Text text="Low side &#10;voltage">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Text>
+            <Text text="Short circuit &#10;losses">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Text>
+            <Text text="Idle current">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Text>
+        </VBox>
+        <VBox layoutX="135.0" layoutY="91.0" prefHeight="70.0" prefWidth="170.0" spacing="15.0"
+              AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="70.0">
+            <children>
+                <TextField fx:id="tfId"/>
+                <TextField fx:id="tfModelOfTransformer"/>
+                <TextField fx:id="tfFullPowerOfTransformer"/>
+                <TextField fx:id="tfShortCircuitVoltage"/>
+                <TextField fx:id="tfIdleLossesOfTransformer"/>
+                <TextField fx:id="tfHighSideVoltage"/>
+                <TextField fx:id="tfLowSideVoltage"/>
+                <TextField fx:id="tfShortCircuitLosses"/>
+                <TextField fx:id="tfIdleCurrent"/>
+            </children>
+            <HBox.margin>
+                <Insets left="10.0"/>
+            </HBox.margin>
+        </VBox>
+
+    </HBox>
+
+
+    <HBox fx:id="hbForTables" layoutX="312.0" layoutY="91.0" prefHeight="500.0" prefWidth="400.0"
+          AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="15.0"
+          AnchorPane.topAnchor="40.0">
+
+        <TableView fx:id="tvForChooseProtectiveEquipment" layoutX="312.0" layoutY="91.0"
+                   onMouseClicked="#handleMouseAction" prefHeight="500.0" prefWidth="335.0"
+                   AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="15.0"
+                   AnchorPane.topAnchor="40.0">
+
+            <columns>
+                <TableColumn fx:id="colIdForChoose" prefWidth="30" text="ID"/>
+            </columns>
+            <columns>
+                <TableColumn fx:id="colEquipmentNominalCurrentForChoose" prefWidth="120" text="Equipment current">
+                    <columns>
+                        <TableColumn fx:id="colNominalEquipmentCurrentForChoose" prefWidth="60" text="Nominal"/>
+                    </columns>
+                    <columns>
+                        <TableColumn fx:id="colStartingEquipmentCurrentForChoose" prefWidth="60" text="Starting"/>
+                    </columns>
+                </TableColumn>
+            </columns>
+            <columns>
+                <TableColumn fx:id="colCalculatedCurrenForChooset" text="Calculated current">
+                    <columns>
+                        <TableColumn fx:id="colThermalReleaseCalculatedCurrentForChoose" text="Thermal &#10;release"/>
+                    </columns>
+
+                    <columns>
+                        <TableColumn fx:id="colElectromagneticReleaseCalculatedCurrentForChoose" prefWidth="100.0"
+                                     text="Electromagnetic &#10;release"/>
+                    </columns>
+                </TableColumn>
+            </columns>
+
+            <VBox.margin>
+                <Insets top="10.0"/>
+            </VBox.margin>
+
+        </TableView>
+        <TableView fx:id="tvChoosenPowerTransformer" layoutX="312.0" layoutY="91.0" onMouseClicked="#handleMouseAction"
+                   prefHeight="500.0" prefWidth="480.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="240.0"
+                   AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0">
+
+            <columns>
+                <TableColumn fx:id="colIdOfChoosen" prefWidth="30" text="ID"/>
+            </columns>
+
+            <columns>
+                <TableColumn fx:id="colModelOfTransformer" prefWidth="100" text="Circuit &#10;breaker &#10;type"/>
+            </columns>
+            <columns>
+                <TableColumn fx:id="colIdleLossesOfTransformer" prefWidth="75.0"
+                             text="Nominal &#10;circuit &#10;breaker &#10;current"/>
+            </columns>
+
+            <columns>
+                <TableColumn fx:id="colNominalCurrent" text="Nominal current">
+                    <columns>
+                        <TableColumn fx:id="colThermalReleaseNominalCurrent" text="Thermal &#10;release"/>
+                    </columns>
+
+                    <columns>
+                        <TableColumn fx:id="colElectromagneticReleaseNominal" prefWidth="100.0"
+                                     text="Electromagnetic &#10;release"/>
+                    </columns>
+                </TableColumn>
+            </columns>
+
+            <columns>
+                <TableColumn fx:id="colHighSideVoltage" prefWidth="100.0" text="Low volt &#10;cable type"/>
+            </columns>
+
+            <VBox.margin>
+                <Insets top="10.0"/>
+            </VBox.margin>
+            <HBox.margin>
+                <Insets left="20.0"/>
+            </HBox.margin>
+        </TableView>
+    </HBox>
+
+
+    <VBox layoutX="13.0" layoutY="362.0" prefHeight="110.0" prefWidth="200.0" spacing="10.0"
+          AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="420.0">
+        <HBox spacing="10.0">
+            <Button fx:id="updateCompensationDevice" layoutX="123.0" layoutY="343.0" mnemonicParsing="false"
+                    onAction="#compensationDevice" prefHeight="25.0" prefWidth="85.0" text="UPDATE"
+                    AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="340.0">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@pictures/icons8_update_32px.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="createCompensationDevice" layoutX="40.0" layoutY="343.0" mnemonicParsing="false"
+                    onAction="#compensationDevice" prefHeight="25.0" prefWidth="85.0" text="CREATE"
+                    AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="340.0">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@pictures/icons8_add_32px.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <padding>
+                <Insets left="10.0"/>
+            </padding>
+        </HBox>
+        <HBox layoutX="10.0" layoutY="10.0" spacing="10.0">
+            <padding>
+                <Insets left="10.0"/>
+            </padding>
+            <VBox.margin>
+                <Insets/>
+            </VBox.margin>
+
+
+            <Button fx:id="deleteCompensationDevice" mnemonicParsing="false" onAction="#compensationDevice"
+                    prefHeight="25.0" prefWidth="85.0" text="DELETE">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@pictures/icons8_cancel_32px.png"/>
+                    </ImageView>
+                </graphic>
+                <HBox.margin>
+                    <Insets left="45.0"/>
+                </HBox.margin>
+            </Button>
+        </HBox>
+        <Button fx:id="refreshAllTables" layoutX="105.0" layoutY="381.0" mnemonicParsing="false"
+                onAction="#compensationDevice" text="REFRESH ALL TABLES" AnchorPane.leftAnchor="50.0"
+                AnchorPane.topAnchor="420.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@pictures/icons8_refresh_32px_2.png"/>
+                </ImageView>
+            </graphic>
+            <VBox.margin>
+                <Insets left="25.0"/>
+            </VBox.margin>
+        </Button>
+    </VBox>
+
+    <TextArea fx:id="taMessage" blendMode="DARKEN" disable="true" layoutX="69.0" layoutY="415.0" prefHeight="200.0"
+              prefWidth="300.0" text="INFORMATION AREA" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+              AnchorPane.topAnchor="530.0"/>
+
+</AnchorPane>

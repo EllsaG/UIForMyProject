@@ -1,15 +1,18 @@
-package com.example.powertransformer.createpowertransformer;
+package com.example.protectiveequpment.createpowertransformer;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class PowerTransformerForResponse {
+@NoArgsConstructor
+@AllArgsConstructor
+public class ForRequestPowerTransformer {
     private long id;
     private String modelOfTransformer;
     private double fullPowerOfTransformer;
-    private double coefOfTransformerLoad;
     private double shortCircuitVoltage;
     private double idleLossesOfTransformer;
     private double highSideVoltage;
